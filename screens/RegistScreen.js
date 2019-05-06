@@ -21,7 +21,7 @@ class RegistScreen extends Component {
     static navigationOptions = {
         header: null,
     };
-    async componentWillMount(){
+    async componentDidMount(){
         // console.log("开始访问")
         // this.props.getUser();
     }
@@ -167,7 +167,7 @@ class RegistScreen extends Component {
                                 this._handleIsOpenClick3()
                             }}>其他方式登录</Text>
                     </Row>
-                    <Row style={{  height: height*120,
+                     {/* <Row style={{  height: height*120,
                         justifyContent: 'center' }}>
                         <Col style={{  height: height*89 }}></Col>
                         <Col style={{  height: height*95,alignItems: 'center', }}>
@@ -184,7 +184,7 @@ class RegistScreen extends Component {
                             </TouchableHighlight>
                         </Col>
                         <Col style={{  height: height*89 }}></Col>
-                    </Row>
+                    </Row>  */}
                 </Grid>
                 {/* </Content> */}
             </Container>

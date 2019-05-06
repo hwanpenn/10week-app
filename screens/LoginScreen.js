@@ -21,7 +21,7 @@ class LoginScreen extends Component {
     static navigationOptions = {
         header: null,
     };
-    async componentWillMount(){
+    async componentDidMount(){
         // console.log(width)
         // const isAvailable = await Expo.SMS.isAvailableAsync();
         // if (isAvailable) {
@@ -76,19 +76,56 @@ class LoginScreen extends Component {
                             // console.log(response.data.data.realName);
                             if(response.data.code===0){
                                 Toast.success('登录成功 !',1);
+                                if(response.data.data.vip===null||response.data.data.vip===undefined){
+                                    AsyncStorage.setItem('vip', ('false'), (error, result) => {
+                                        if (!error) {
+                                            // console.log("设置成功")
+                                            // this.setState({ firstOpen: false });
+                                        }
+                                    });
+                                }else{
+                                    AsyncStorage.setItem('vip', (response.data.data.vip), (error, result) => {
+                                        if (!error) {
+                                            // console.log("设置成功")
+                                            // this.setState({ firstOpen: false });
+                                        }
+                                    });
+                                }
                                 AsyncStorage.setItem('username', (response.data.data.realName), (error, result) => {
                                     if (!error) {
                                         // console.log("设置成功")
                                         // this.setState({ firstOpen: false });
                                     }
                                 });
-                                AsyncStorage.setItem('token', (response.data.data.token), (error, result) => {
+                                AsyncStorage.setItem('id', (response.data.data._id), (error, result) => {
                                     if (!error) {
                                         // console.log("设置成功")
                                         // this.setState({ firstOpen: false });
                                     }
                                 });
-                                // thisaTemp.props.navigation.navigate( 'Index');
+                                AsyncStorage.setItem('realName', (response.data.data.realName), (error, result) => {
+                                    if (!error) {
+                                        // console.log("设置成功")
+                                        // this.setState({ firstOpen: false });
+                                    }
+                                });
+                                if(response.data.data.vip===null||response.data.data.vip===undefined){
+                                    AsyncStorage.setItem('token', ('false'), (error, result) => {
+                                        if (!error) {
+                                            // console.log("设置成功")
+                                            // this.setState({ firstOpen: false });
+                                        }
+                                    });
+                                }else{
+                                    AsyncStorage.setItem('token', (response.data.data.token), (error, result) => {
+                                        if (!error) {
+                                            // console.log("设置成功")
+                                            // this.setState({ firstOpen: false });
+                                        }
+                                    });
+                                }
+                                // thisaTemp.props.appReduxChange(response.data.data)
+                                thisaTemp.props.navigation.navigate( 'Main');
                             }else {
                                 Toast.fail(response.data.msg,1);
                             }
@@ -237,8 +274,8 @@ const mapDispatchToProps = (dispatch) => {
         appReduxTest: () => {
             dispatch(appReduxTest())
         },
-        appReduxChange: () => {
-            dispatch(appReduxChange())
+        appReduxChange: (app) => {
+            dispatch(appReduxChange(app))
         }
     }
 }

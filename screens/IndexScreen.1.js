@@ -57,74 +57,58 @@ class IndexScreen extends Component {
                     username:value?value:''
                 })
             })
-        AsyncStorage.getItem('vip')
-            .then((value) => {
-                thisTemp.setState({
-                    vip:value?value:'false'
-                })
-            })
         // console.log(width)
     }
-    // async componentDidMount(){
-    // //    this.props.appReduxChange({"usename":'123'})
-    // }
-    handleMenuClick00 = () => {
-        this.props.navigation.navigate( 'News');
-    };
     handleMenuClick01 = () => {
-        this.props.navigation.navigate( 'Video');
-    };
-    handleMenuClick02 = () => {
-        this.props.navigation.navigate( 'Rank');
-    };
-    handleMenuClick03 = () => {
-        this.props.navigation.navigate( 'BaseData');
-    };
-    handleMenuClick04 = () => {
         this.props.navigation.navigate( 'Recipe');
     };
+    handleMenuClick02 = () => {
+        this.props.navigation.navigate( 'News');
+    };
+    handleMenuClick03 = () => {
+        this.props.navigation.navigate( 'News');
+    };
+    handleMenuClick04 = () => {
+        this.props.navigation.navigate( 'News');
+    };
     handleMenuClick05 = () => {
-        this.props.navigation.navigate( 'BaseDataVip');
+        this.props.navigation.navigate( 'News');
     };
     handleMenuClick06 = () => {
-        this.props.navigation.navigate( 'VipDataList');
+        this.props.navigation.navigate( 'News');
     };
     handleMenuClick07 = () => {
-        this.props.navigation.navigate( 'Chart');
+        this.props.navigation.navigate( 'News');
     };
     handleMenuClick08 = () => {
-        this.props.navigation.navigate( 'TaskShow');
-    };
-    handleMenuClick09 = () => {
-        this.props.navigation.navigate( 'Task');
-    };
-    handleMenuClick10 = () => {
-        this.props.navigation.navigate( 'Picture');
+        this.props.navigation.navigate( 'News');
     };
    
     render() {
         // const
         return (
             <Container>
-                <Row style={{  height: height*10 }}></Row>
-                <Header style={{  marginTop: -height*22 }} transparent>
+
+                <Row style={{  height: height*12 }}> </Row>
+                <Header transparent>
+                  
                     <Body style={{}} >
-                    <Title style={{fontSize: 25,width:width*300,marginLeft:width*35}}>欢迎加入十周挑战</Title>
+                    <Title style={{fontSize: 25,width:width*300,marginLeft:width*60}}>欢迎{this.state.username.slice(0,1)}加入十周挑战</Title>
+
                     </Body>
                     <Right>
-                        <Button transparent>
-                            <Icon name="envelope" type='SimpleLineIcons'/>
-                            <Badge style={{ height: height*15,width:width*15,marginLeft:-(width*8),marginTop:-(width*0)}}><Text style={{marginLeft:-(width*3),marginTop:-(width*5),fontSize: 10}} >1</Text></Badge>
-                        </Button>
+                    
                     </Right>
                 </Header>
+              
+
                 <Carousel
-                    style={styles.wrapper}
-                    selectedIndex={2}
-                    autoplay
-                    infinite
-                    afterChange={this.onHorizontalSelectedIndexChange}
-                >
+                style={styles.wrapper}
+                selectedIndex={2}
+                autoplay
+                infinite
+                afterChange={this.onHorizontalSelectedIndexChange}
+              >
                 <View
                   style={[styles.containerHorizontal]}
                 >
@@ -144,122 +128,11 @@ class IndexScreen extends Component {
                 <Image style={{width: width*351,height: height*137.5,  flex: 1 }} source={cards[2].image} />
                 </View>
               </Carousel>
+
                 <Content />
                 <ScrollView style={styles.container1} contentContainerStyle={styles.contentContainer}>
                     <Grid>
-                    <Row style={{  height: height*182.5,
-                    }}>
-                   <Col style={{width:  width*182.5 }}>
-                       <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
-                       <View style={{
-                           position: "absolute",
-                           zIndex: 9998,
-                           alignItems: 'center',justifyContent : "center"
-                       }}>
-                           <View style={{flex: 1}}/>
-                           <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
-                           <Text style={{fontSize: 25,color:"black"}}>新闻列表</Text>
-                           </Row>
-                           <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
-                           <Text style={{fontSize: 15,color:"grey"}}>健身动态早知道</Text>
-                           </Row>
-                           <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
-                           <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
-                               <Button onPress={() => {
-                                   this.handleMenuClick00()
-                               }} style={styles.menubutton} rounded>
-                                   <Text style={{fontSize: 19}}>查看动态</Text>
-                               </Button>
-                           </View>
-                           </Row>
-                       </View>
-                       
-                   </Col>
-                   <Col style={{width:  width*182.5,marginLeft:width*3 ,}}>
-                   <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
-                   <View style={{
-                       position: "absolute",
-                       zIndex: 9998,
-                       alignItems: 'center',justifyContent : "center"
-                   }}>
-                       <View style={{flex: 1}}/>
-                       <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
-                       <Text style={{fontSize: 25,color:"black"}}>健身视频</Text>
-                       </Row>
-                       <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
-                       <Text style={{fontSize: 15,color:"grey"}}>跟着视频学起来</Text>
-                       </Row>
-                       <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
-                       <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
-                           <Button onPress={() => {
-                               this.handleMenuClick01()
-                           }} style={styles.menubutton} rounded>
-                               <Text style={{fontSize: 19}}>开始学习</Text>
-                           </Button>
-                       </View>
-                       </Row>
-                   </View>
-                   </Col>
-               </Row>
-                    <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
-               
-                    <Row style={{  height: height*182.5,
-               }}>
-              <Col style={{width:  width*182.5 }}>
-                  <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
-                  <View style={{
-                      position: "absolute",
-                      zIndex: 9998,
-                      alignItems: 'center',justifyContent : "center"
-                  }}>
-                      <View style={{flex: 1}}/>
-                      <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
-                      <Text style={{fontSize: 25,color:"black"}}>排行榜</Text>
-                      </Row>
-                      <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
-                      <Text style={{fontSize: 15,color:"grey"}}>十周挑战排行版</Text>
-                      </Row>
-                      <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
-                      <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
-                          <Button onPress={() => {
-                              this.handleMenuClick02()
-                          }} style={styles.menubutton} rounded>
-                              <Text style={{fontSize: 19}}>查看排行榜</Text>
-                          </Button>
-                      </View>
-                      </Row>
-                  </View>
-                  
-              </Col>
-              <Col style={{width:  width*182.5,marginLeft:width*3 ,}}>
-              <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
-              <View style={{
-                  position: "absolute",
-                  zIndex: 9998,
-                  alignItems: 'center',justifyContent : "center"
-              }}>
-                  <View style={{flex: 1}}/>
-                  <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
-                  <Text style={{fontSize: 25,color:"black"}}>基础数据</Text>
-                  </Row>
-                  <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
-                  <Text style={{fontSize: 15,color:"grey"}}>记录数据 对比效果</Text>
-                  </Row>
-                  <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
-                  <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
-                      <Button onPress={() => {
-                          this.handleMenuClick03()
-                      }} style={styles.menubutton} rounded>
-                          <Text style={{fontSize: 19}}>编辑数据</Text>
-                      </Button>
-                  </View>
-                  </Row>
-              </View>
-              </Col>
-          </Row>
-                    <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
-                        
-                    <Row style={{  height: height*182.5,
+                        <Row style={{  height: height*182.5,
                              }}>
                             <Col style={{width:  width*182.5 }}>
                                 <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
@@ -278,7 +151,7 @@ class IndexScreen extends Component {
                                     <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                                     <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                         <Button onPress={() => {
-                                            this.handleMenuClick04()
+                                            this.handleMenuClick01()
                                         }} style={styles.menubutton} rounded>
                                             <Text style={{fontSize: 19}}>查看食谱</Text>
                                         </Button>
@@ -296,73 +169,17 @@ class IndexScreen extends Component {
                             }}>
                                 <View style={{flex: 1}}/>
                                 <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
-                                <Text style={{fontSize: 25,color:"black"}}>每日打卡</Text>
+                                <Text style={{fontSize: 25,color:"black"}}>健身训练</Text>
                                 </Row>
                                 <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
-                                <Text style={{fontSize: 15,color:"grey"}}>记录生活 记录健康</Text>
+                                <Text style={{fontSize: 15,color:"grey"}}>跟着训练节奏动起来</Text>
                                 </Row>
                                 <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                                 <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                     <Button onPress={() => {
-                                        this.handleMenuClick05()
+                                        this.handleMenuClick()
                                     }} style={styles.menubutton} rounded>
-                                        <Text style={{fontSize: 19}}>开始打卡</Text>
-                                    </Button>
-                                </View>
-                                </Row>
-                            </View>
-                            </Col>
-                        </Row>
-                        <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
-                        
-                        <Row style={{  height: height*182.5,
-                             }}>
-                            <Col style={{width:  width*182.5 }}>
-                                <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
-                                <View style={{
-                                    position: "absolute",
-                                    zIndex: 9998,
-                                    alignItems: 'center',justifyContent : "center"
-                                }}>
-                                    <View style={{flex: 1}}/>
-                                    <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
-                                    <Text style={{fontSize: 25,color:"black"}}>打卡数据</Text>
-                                    </Row>
-                                    <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
-                                    <Text style={{fontSize: 15,color:"grey"}}>打卡数据统计</Text>
-                                    </Row>
-                                    <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
-                                    <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
-                                        <Button onPress={() => {
-                                            this.handleMenuClick06()
-                                        }} style={styles.menubutton} rounded>
-                                            <Text style={{fontSize: 19}}>查看数据</Text>
-                                        </Button>
-                                    </View>
-                                    </Row>
-                                </View>
-                                
-                            </Col>
-                            <Col style={{width:  width*182.5,marginLeft:width*3 ,}}>
-                            <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
-                            <View style={{
-                                position: "absolute",
-                                zIndex: 9998,
-                                alignItems: 'center',justifyContent : "center"
-                            }}>
-                                <View style={{flex: 1}}/>
-                                <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
-                                <Text style={{fontSize: 25,color:"black"}}>可视化</Text>
-                                </Row>
-                                <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
-                                <Text style={{fontSize: 15,color:"grey"}}>健身数据可视化</Text>
-                                </Row>
-                                <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
-                                <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
-                                    <Button onPress={() => {
-                                        this.handleMenuClick07()
-                                    }} style={styles.menubutton} rounded>
-                                        <Text style={{fontSize: 19}}>回顾统计</Text>
+                                        <Text style={{fontSize: 19}}>开始训练</Text>
                                     </Button>
                                 </View>
                                 </Row>
@@ -381,17 +198,17 @@ class IndexScreen extends Component {
                                 }}>
                                     <View style={{flex: 1}}/>
                                     <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
-                                    <Text style={{fontSize: 25,color:"black"}}>今日任务</Text>
+                                    <Text style={{fontSize: 25,color:"black"}}>私人订制</Text>
                                     </Row>
                                     <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
-                                    <Text style={{fontSize: 15,color:"grey"}}>每日任务 科学健身</Text>
+                                    <Text style={{fontSize: 15,color:"grey"}}>查看定制方案</Text>
                                     </Row>
                                     <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                                     <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                         <Button onPress={() => {
-                                            this.handleMenuClick08()
+                                            this.handleMenuClick()
                                         }} style={styles.menubutton} rounded>
-                                            <Text style={{fontSize: 19}}>查看任务</Text>
+                                            <Text style={{fontSize: 19}}>查看定制方案</Text>
                                         </Button>
                                     </View>
                                     </Row>
@@ -407,17 +224,17 @@ class IndexScreen extends Component {
                             }}>
                                 <View style={{flex: 1}}/>
                                 <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
-                                <Text style={{fontSize: 25,color:"black"}}>时间轴</Text>
+                                <Text style={{fontSize: 25,color:"black"}}>健身训练</Text>
                                 </Row>
                                 <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
-                                <Text style={{fontSize: 15,color:"grey"}}>记录健身每一天</Text>
+                                <Text style={{fontSize: 15,color:"grey"}}>跟着训练节奏动起来</Text>
                                 </Row>
                                 <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                                 <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                     <Button onPress={() => {
-                                        this.handleMenuClick09()
+                                        this.handleMenuClick()
                                     }} style={styles.menubutton} rounded>
-                                        <Text style={{fontSize: 19}}>查看</Text>
+                                        <Text style={{fontSize: 19}}>开始训练</Text>
                                     </Button>
                                 </View>
                                 </Row>
@@ -426,35 +243,83 @@ class IndexScreen extends Component {
                         </Row>
                         <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
                         <Row style={{  height: height*182.5,
-                        }}>
-                       <Col style={{width:  width*182.5 }}>
-                           <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
-                           <View style={{
-                               position: "absolute",
-                               zIndex: 9998,
-                               alignItems: 'center',justifyContent : "center"
-                           }}>
-                               <View style={{flex: 1}}/>
-                               <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
-                               <Text style={{fontSize: 25,color:"black"}}>前后对比</Text>
-                               </Row>
-                               <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
-                               <Text style={{fontSize: 15,color:"grey"}}>每周对比 立竿见影</Text>
-                               </Row>
-                               <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
-                               <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
-                                   <Button onPress={() => {
-                                       this.handleMenuClick10()
-                                   }} style={styles.menubutton} rounded>
-                                       <Text style={{fontSize: 19}}>照片比对</Text>
-                                   </Button>
-                               </View>
-                               </Row>
-                           </View>
-                           
-                       </Col>
-                   </Row>
-                   <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
+                             }}>
+                            <Col style={{width:  width*182.5 }}>
+                                <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
+                                <View style={{
+                                    position: "absolute",
+                                    zIndex: 9998,
+                                    alignItems: 'center',justifyContent : "center"
+                                }}>
+                                    <View style={{flex: 1}}/>
+                                    <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
+                                    <Text style={{fontSize: 25,color:"black"}}>私人订制</Text>
+                                    </Row>
+                                    <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
+                                    <Text style={{fontSize: 15,color:"grey"}}>查看定制方案</Text>
+                                    </Row>
+                                    <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
+                                    <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
+                                        <Button onPress={() => {
+                                            this.handleMenuClick()
+                                        }} style={styles.menubutton} rounded>
+                                            <Text style={{fontSize: 19}}>查看定制方案</Text>
+                                        </Button>
+                                    </View>
+                                    </Row>
+                                </View>
+                                
+                            </Col>
+                            <Col style={{width:  width*182.5,marginLeft:width*3 ,}}>
+                            <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
+                            <View style={{
+                                position: "absolute",
+                                zIndex: 9998,
+                                alignItems: 'center',justifyContent : "center"
+                            }}>
+                                <View style={{flex: 1}}/>
+                                <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
+                                <Text style={{fontSize: 25,color:"black"}}>健身训练</Text>
+                                </Row>
+                                <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
+                                <Text style={{fontSize: 15,color:"grey"}}>跟着训练节奏动起来</Text>
+                                </Row>
+                                <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
+                                <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
+                                    <Button onPress={() => {
+                                        this.handleMenuClick()
+                                    }} style={styles.menubutton} rounded>
+                                        <Text style={{fontSize: 19}}>开始训练</Text>
+                                    </Button>
+                                </View>
+                                </Row>
+                            </View>
+                            </Col>
+                        </Row>
+                        <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
+                        <Row style={{  height: height*182.5,
+                            }}>
+                            {/*<Text style={{fontSize: 18}}>重置密码</Text>*/}
+                            <Col style={{width:  width*182.5 ,}}>
+                                <Image style={start.backgroundImage} source={require('../assets/images/menu3.png')}/>
+                                {/*<Ionicons name="ios-arrow-back" size={30} color="black" />*/}
+                                {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
+                                    {/*this._handleClickVideo()*/}
+                                {/*}}>*/}
+                                    {/*<Image style={start.backgroundImage1} source={require('../assets/images/menu1.png')}/>*/}
+                                {/*</TouchableHighlight>*/}
+                            </Col>
+                            <Col style={{width:  width*182.5,marginLeft:width*3 }}>
+                                <Image style={start.backgroundImage} source={require('../assets/images/menu4.png')}/>
+                                {/*<Text style={{fontSize: 18}}>重置密码</Text>*/}
+                                {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
+                                    {/*this._handleClickHealth()*/}
+                                {/*}}>*/}
+                                    {/*<Image style={start.backgroundImage2} source={require('../assets/images/menu2.png')}/>*/}
+                                {/*</TouchableHighlight>*/}
+                            </Col>
+                        </Row>
+                        <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
                        
                     </Grid>
                 </ScrollView>
@@ -651,8 +516,11 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        appReduxChange: (app) => {
-            dispatch(appReduxChange(app))
+        appReduxTest: () => {
+            dispatch(appReduxTest())
+        },
+        appReduxChange: () => {
+            dispatch(appReduxChange())
         }
     }
 }

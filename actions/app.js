@@ -4,6 +4,9 @@ export const APPREDUXCHANGE = "APPREDUXCHANGE";
 export function appReduxTest() {
     return {type: APPREDUXTEST}
 }
-export function appReduxChange() {
-    return {type: APPREDUXCHANGE}
+export function appReduxChange(app) {
+    return {
+        type: APPREDUXCHANGE,
+        app:app
+    }
 }

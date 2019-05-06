@@ -12,6 +12,9 @@ import { Ionicons } from '@expo/vector-icons';
 import {urlDev} from "../constants/Url";
 import axios from "axios/index";
 
+const { height: D_HEIGHT, width: D_WIDTH } = Dimensions.get('window');
+const X_WIDTH = 375;
+const X_HEIGHT = 812;
 class ResetName extends Component {
     state={
         gettingCode:false,
@@ -28,30 +31,30 @@ class ResetName extends Component {
     // static navigationOptions = {
     //     title: '重置密码',
     // };
-    async componentWillMount(){
+    async componentDidMount(){
         const thisTemp = this;
         // console.log(width)
-        axios.get(urlDev+'/api/role')
-            .then(function (response) {
-                // console.log("短信请求111");
-                // console.log(response);
-                // console.log(response.data);
-                // this.setState({mobile:''})
-                // thisTemp.setState({
-                //     code:response.data.data.code
-                // })
-                response.data.data.list.map((role)=>{
-                    if(role.name==='普通用户'){
-                        // console.log(role._id);
-                        thisTemp.setState({
-                            role:role._id
-                        })
-                    }
-                })
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        // axios.get(urlDev+'/api/role')
+        //     .then(function (response) {
+        //         // console.log("短信请求111");
+        //         // console.log(response);
+        //         // console.log(response.data);
+        //         // this.setState({mobile:''})
+        //         // thisTemp.setState({
+        //         //     code:response.data.data.code
+        //         // })
+        //         response.data.data.list.map((role)=>{
+        //             if(role.name==='普通用户'){
+        //                 // console.log(role._id);
+        //                 thisTemp.setState({
+        //                     role:role._id
+        //                 })
+        //             }
+        //         })
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
     }
     _handleIsOpenClick = () => {
         this.setState({ gettingCode: true, gettingCodeTime:60});
@@ -95,7 +98,7 @@ class ResetName extends Component {
                         realName: thisaTemp.state.username,
                         mobile: value,
                         password: thisaTemp.state.password,
-                        role: thisaTemp.state.role,
+                        role: "user",
                     }
                     // console.log(params)
                     axios.post(urlDev+'/api/user',params)
@@ -174,45 +177,40 @@ class ResetName extends Component {
                         {/*</Col>*/}
                     {/*</Row>*/}
                     <Row style={{  height: height*41 }}></Row>
-                    <Row style={{  height: height*67,
-                        justifyContent: 'center' }}>
-                        {/* <Content  > */}
-                            <Item style={{  width: width*315,marginBottom:30 }} >
-                                <Input onChangeText={(text) => this.setState({username:text})} style={{fontSize: 15,marginLeft:30}} placeholderTextColor="#888888"  placeholder='用户名'/>
-                                {/*<Icon name='checkmark-circle' />*/}
-                            </Item>
-                        {/* </Content> */}
-                    </Row>
+                    
+
                     <Row style={{  height: height*67,
                         justifyContent: 'center' }}>
                         {/* <Content  > */}
                             <Item style={{  width: width*315,marginBottom:15 }} >
-                                <Input onChangeText={(text) => this.setState({password:text})} style={{fontSize: 15,marginLeft:30}} placeholderTextColor="#888888"  placeholder='密码'/>
+                                <Input onChangeText={(text) => this.setState({username:text})} style={{fontSize: 15,marginLeft: width*30}} placeholderTextColor="#888888"  placeholder='用户名'/>
                                 {/*<Icon name='checkmark-circle' />*/}
                             </Item>
                         {/* </Content> */}
                     </Row>
                     <Row style={{  height: height*55,
                         justifyContent: 'center' }}>
-                        <Content  >
-                            <Item style={{  width: width*315,marginLeft: width*30 }} >
-                                <Input onChangeText={(text) => this.setState({passwordCfm:text})} style={{fontSize: 15}} placeholderTextColor="#888888" placeholder='再次输入密码'/>
-                                {/*{this.state.gettingCode?*/}
-                                    {/*<Button onPress={() => {*/}
-                                    {/*this._handleIsOpenClick()*/}
-                                {/*}} style={styles.gettingCode} disabled bordered rounded>*/}
-                                    {/*<Text style={{fontSize: 10,color:'#868686',*/}
-                                        {/*justifyContent: 'center',}}>{this.state.gettingCodeTime}秒后重新获取</Text>*/}
-                                {/*</Button>:*/}
-                                    {/*<Button onPress={() => {*/}
-                                        {/*this._handleIsOpenClick()*/}
-                                    {/*}} style={styles.getCode} bordered rounded>*/}
-                                        {/*<Text style={{fontSize: 10,color:'#EB632E',*/}
-                                            {/*justifyContent: 'center',}}>获取验证码</Text>*/}
-                                    {/*</Button>}*/}
+                        {/* <Content  > */}
+                            <Item style={{  width: width*315,marginBottom:15 }} >
+                                <Input secureTextEntry={true} inputType="textPassword" type="password" onChangeText={(text) => this.setState({password:text})} style={{fontSize: 15,marginLeft: width*30}} placeholderTextColor="#888888" placeholder='密码'/>
                             </Item>
-                        </Content>
+                        {/* </Content> */}
                     </Row>
+                    <Row style={{  height: height*55,
+                        justifyContent: 'center' }}>
+                        {/* <Content  > */}
+                            <Item style={{  width: width*315,marginBottom:15 }} >
+                                <Input secureTextEntry={true} inputType="textPassword" type="password" onChangeText={(text) => this.setState({passwordCfm:text})} style={{fontSize: 15,marginLeft: width*30}} placeholderTextColor="#888888" placeholder='确认密码'/>
+                            </Item>
+                        {/* </Content> */}
+                    </Row>
+
+
+
+
+                    // <Row style={{  height: height*1 }}></Row>
+                   
+                   
                     <Row style={{  height: height*40 }}></Row>
                     <Row style={{  height: height*75,
                         justifyContent: 'center' }}>

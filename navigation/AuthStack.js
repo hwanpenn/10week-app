@@ -6,16 +6,34 @@ import LoginScreen from '../screens/LoginScreen';
 import FindBackPassword from '../screens/FindBackPassword';
 import ResetPassword from '../screens/ResetPassword';
 import ResetName from '../screens/ResetName';
+import RecipeScreen from '../screens/RecipeScreen';
+import BaseDataScreen from '../screens/BaseDataScreen';
+import BaseDataVipScreen from '../screens/BaseDataVipScreen';
+import TaskScreen from '../screens/TaskScreen';
+import TaskShowScreen from '../screens/TaskShowScreen';
+import ChartScreen from '../screens/ChartScreen';
+import VipDataListScreen from '../screens/VipDataListScreen';
+import PictureScreen from '../screens/PictureScreen';
 import IndexScreen from '../screens/IndexScreen';
 
 const AuthStack = createStackNavigator({
-    SignIn: SignInScreen ,
+    
+    // SignIn: SignInScreen ,
+    // Index: IndexScreen ,
     Regist: RegistScreen ,
     Login: LoginScreen ,
     FindBack: FindBackPassword ,
     Reset: ResetPassword ,
     SetName: ResetName ,
-    Index: IndexScreen ,
+    Recipe: RecipeScreen ,
+    BaseData: BaseDataScreen ,
+    BaseDataVip: BaseDataVipScreen ,
+    Task: TaskScreen ,
+    TaskShow: TaskShowScreen ,
+    Chart: ChartScreen ,
+    VipDataList: VipDataListScreen ,
+    Picture: PictureScreen ,
+    // Index: IndexScreen ,
 });
 
 export default AuthStack;

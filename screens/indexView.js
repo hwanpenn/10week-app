@@ -44,7 +44,7 @@ class RegistScreen extends Component {
     static navigationOptions = {
         header: null,
     };
-    async componentWillMount(){
+    async componentDidMount(){
         const thisTemp = this;
         AsyncStorage.getItem('username')
             .then((value) => {

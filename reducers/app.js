@@ -1,7 +1,8 @@
 import {APPREDUXTEST,APPREDUXCHANGE} from "../actions/app";
 
 const initState = {
-    username: "hwanpenn"
+    username: "hwanpenn",
+    app: {}
 };
 
 export default function reducer(state = initState,action) {
@@ -14,7 +15,7 @@ export default function reducer(state = initState,action) {
         case APPREDUXCHANGE:
             return{
                 ...state,
-                username: "hwanpennNew"
+                app: action.app
             };
         default:
             return state

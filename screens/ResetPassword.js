@@ -25,7 +25,7 @@ class ResetPassword extends Component {
     // static navigationOptions = {
     //     title: '重置密码',
     // };
-    async componentWillMount(){
+    async componentDidMount(){
         // console.log(width)
     }
     _handleIsOpenClick = () => {

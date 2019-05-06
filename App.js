@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform, StatusBar, StyleSheet, View,Dimensions, ScrollView, Image, AsyncStorage} from 'react-native';
+import {Platform, StatusBar, StyleSheet, View,Dimensions, ScrollView, Image, AsyncStorage, SafeAreaView} from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import store from './store'
@@ -13,8 +13,8 @@ export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
     //默认是第一次打开
-    // firstOpen: false,
-    firstOpen: true,
+    firstOpen: false,
+    // firstOpen: true,
   };
 
 
@@ -51,7 +51,7 @@ export default class App extends React.Component {
     } else {
         if (this.state.firstOpen ) {
             return (
-                <ScrollView
+                    <ScrollView
                     contentContainerStyle={{
                         width: Dimensions.get('window').width * 4,
                         height: Dimensions.get('window').height
@@ -134,6 +134,7 @@ export default class App extends React.Component {
             );
         } else {
             return (
+                <SafeAreaView style={styles.safeArea}>
                     <Provider store={store}>
                         <View style={styles.container}>
                             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
@@ -144,6 +145,8 @@ export default class App extends React.Component {
                             {/*<AppNavigator />*/}
                         {/*</Container>*/}
                     </Provider>
+                </SafeAreaView>
+                    
 
             );
         }
@@ -154,11 +157,7 @@ export default class App extends React.Component {
   _loadResourcesAsync = async () => {
     return Promise.all([
       Asset.loadAsync([
-        require('./assets/images/menu1.png'),
-        require('./assets/images/menu2.png'),
-        require('./assets/images/menu3.png'),
-        require('./assets/images/menu4.png'),
-        require('./assets/images/menu5.png'),
+        require('./assets/images/menu11.png'),
         require('./assets/images/guide1.png'),
         require('./assets/images/guide2.png'),
         require('./assets/images/guide3.png'),
@@ -197,6 +196,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#EB632E',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#eee'
   }
 });
 const start = StyleSheet.create({

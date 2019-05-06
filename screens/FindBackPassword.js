@@ -23,7 +23,7 @@ class FindBackPassword extends Component {
     static navigationOptions = {
         header: null,
     };
-    async componentWillMount(){
+    async componentDidMount(){
         // console.log(width)
     }
     _handleIsOpenClick = () => {
