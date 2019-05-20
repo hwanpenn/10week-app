@@ -1,8 +1,8 @@
-import React from 'react';
+// import React from 'react';
 import { createSwitchNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
-import HomeNavigator from './HomeNavigator';
+// import HomeNavigator from './HomeNavigator';
 import AuthStack from './AuthStack';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 

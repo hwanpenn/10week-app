@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Header,Text,Item, Input, Icon,Content,Button } from 'native-base';
+import { Container, Header,Text,Item, Input, Icon,Button } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import {appReduxChange, appReduxTest} from "../actions/app";
 import {width, height} from "../constants/Layout";
 import {connect} from "react-redux";
-import {AsyncStorage, Dimensions, Platform, StyleSheet,TouchableHighlight,Image,View,StatusBar} from "react-native";
+import {AsyncStorage,  StyleSheet} from "react-native";
 // import {   } from 'native-base';
 import {   Left, Body, Right, Title } from 'native-base';
 import {urlDev} from "../constants/Url";
@@ -103,12 +103,6 @@ class LoginScreen extends Component {
                                         // this.setState({ firstOpen: false });
                                     }
                                 });
-                                AsyncStorage.setItem('realName', (response.data.data.realName), (error, result) => {
-                                    if (!error) {
-                                        // console.log("设置成功")
-                                        // this.setState({ firstOpen: false });
-                                    }
-                                });
                                 if(response.data.data.vip===null||response.data.data.vip===undefined){
                                     AsyncStorage.setItem('token', ('false'), (error, result) => {
                                         if (!error) {
@@ -142,12 +136,12 @@ class LoginScreen extends Component {
     };
     _handleIsOpenClick3 = () => {
         this.props.navigation.navigate( 'FindBack');
-        // AsyncStorage.setItem('firstOpen', JSON.stringify('false'), (error, result) => {
-        //     if (!error) {
-        //         console.log("设置成功")
-        //         this.setState({ firstOpen: false });
-        //     }
-        // });
+    };
+    _handleIsOpenClick4 = () => {
+        this.props.navigation.navigate( 'Regist');
+    };
+    _handleIsOpenClick5 = () => {
+        this.props.navigation.navigate( 'Index');
     };
     render() {
         // const
@@ -216,6 +210,18 @@ class LoginScreen extends Component {
                         }} style={styles.registButton} rounded>
                             <Text style={{ fontSize:22 }} >登录</Text>
                         </Button>
+                    </Row>
+                    <Row style={{  height: height*77.5,
+                        justifyContent: 'center' }}>
+                            <Text style={{fontSize: 13,color:'#444444'}} onPress={() => {
+                                this._handleIsOpenClick4()
+                            }}>没有账号？去注册</Text>
+                    </Row>
+                    <Row style={{  height: height*35,
+                        justifyContent: 'center' }}>
+                            <Text style={{fontSize: 15,color:'#999999'}} onPress={() => {
+                                this._handleIsOpenClick5()
+                            }}>游客登录</Text>
                     </Row>
                 </Grid>
             </Container>

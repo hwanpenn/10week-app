@@ -11,18 +11,16 @@ import { viewurl } from '../cfg/cfg.js';
 import {  Row } from 'react-native-easy-grid';
 import {width, height} from "../constants/Layout";
 import Loadinggif from '../components/Loadinggif';
-// import Webviewtemp from './component/Webviewtemp';
 import { WebView,StatusBar} from 'react-native';
-import axios from "axios/index";
-export default class TaskShowScreen extends React.Component {
+
+export default class BaseDataScreen extends React.Component {
   static navigationOptions = {
     header: null,
     // headerTitle: 'null'
     
   };
   state={
-    id:'',
-    vipDay:'1'
+    id:''
 };
   async componentDidMount(){
     const thisTemp = this;
@@ -31,18 +29,9 @@ export default class TaskShowScreen extends React.Component {
           thisTemp.setState({
               id:value?value:'5cae30c19a6c6264b51fc555'
             })
-            axios.get('/api/user/'+value?value:'5cae30c19a6c6264b51fc555'
-        ).then( (response) => {
-        console.log(response.data.data)
-          this.setState({
-            vipDay:response.data.data.vipDay               
-                      })
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
             // alert(value)
         })
+    // alert(width)
 }
   renderLoading = ()=>{
     return(<Loadinggif />)
@@ -52,7 +41,7 @@ export default class TaskShowScreen extends React.Component {
     if(e.nativeEvent.data==="Index"){
       this.props.navigation.navigate('Home');
     }
-  }
+}
 
   render() {
     const patchPostMessageFunction = function() {
@@ -73,9 +62,9 @@ export default class TaskShowScreen extends React.Component {
     
     return (
       <View style={styles.container}>
-       {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
-     <WebView scrollEnabled={false}
-        source={{uri: viewurl+"/mobile/taskshowpage/"+this.state.vipDay}}
+      {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
+     <WebView scrollEnabled={false} 
+        source={{uri: viewurl+"/mobile/basedatapage/"+this.state.id}}
         style={{marginTop: Platform.OS === 'ios' ?0:5}}
         useWebKit={true}
         mixedContentMode='always'

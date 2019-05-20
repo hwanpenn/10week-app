@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Text,Item, Input,Content } from 'native-base';
+import { Text,Item, Input } from 'native-base';
 import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import {  Row, Grid } from 'react-native-easy-grid';
 import {appReduxChange, appReduxTest} from "../actions/app";
 import {width, height} from "../constants/Layout";
 import {connect} from "react-redux";
-import {  Toast, WhiteSpace, WingBlank } from 'antd-mobile-rn';
-import {AsyncStorage, Dimensions, Platform, StyleSheet,TouchableHighlight,Image,View,StatusBar} from "react-native";
+import {  Toast } from 'antd-mobile-rn';
+import {AsyncStorage, Dimensions, StyleSheet} from "react-native";
 // import {   } from 'native-base';
-import { Ionicons } from '@expo/vector-icons';
 import {urlDev} from "../constants/Url";
 import axios from "axios/index";
 

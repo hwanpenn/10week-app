@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Container, Header,Text,Item, Input, Icon,Content,Button } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Container,Text,Item, Input,Button } from 'native-base';
+import { Row, Grid } from 'react-native-easy-grid';
 import {getUser} from "../actions/registScreen";
 import {width, height} from "../constants/Layout";
-import {urlDev, urlPro} from "../constants/Url";
+import {urlDev} from "../constants/Url";
 import {connect} from "react-redux";
 import axios from 'axios';
-import {  Toast, WhiteSpace, WingBlank } from 'antd-mobile-rn';
-import {AsyncStorage, Dimensions, Platform, StyleSheet,TouchableHighlight,Image,View,StatusBar} from "react-native";
+import {  Toast } from 'antd-mobile-rn';
+import {AsyncStorage, Platform, StyleSheet} from "react-native";
 // import {   } from 'native-base';
 
 class RegistScreen extends Component {
@@ -96,6 +96,9 @@ class RegistScreen extends Component {
         //     }
         // });
     };
+    _handleIsOpenClick4 = () => {
+        this.props.navigation.navigate( 'Main');
+    };
     render() {
         // const
         // const thisTemp = this;
@@ -135,13 +138,13 @@ class RegistScreen extends Component {
                                     this._handleIsOpenClick()
                                 }} style={styles.gettingCode} disabled bordered rounded>
                                     <Text style={{fontSize: 10,color:'#868686',
-                                        justifyContent: 'center',}}>{this.state.gettingCodeTime}秒后重新获取</Text>
+                                        justifyContent: 'center',}}>{this.state.gettingCodeTime}{Platform.OS === 'ios' ?'秒后重新获取' : '秒'}</Text>
                                 </Button>:
                                     <Button onPress={() => {
                                         this._handleIsOpenClick()
                                     }} style={styles.getCode} bordered rounded>
                                         <Text style={{fontSize: 10,color:'#EB632E',
-                                            justifyContent: 'center',}}>获取验证码</Text>
+                                            justifyContent: 'center',}}>{Platform.OS === 'ios' ?'获取验证码' : '验证码'}</Text>
                                     </Button>}
                             </Item>
                         {/* </Content> */}
@@ -164,9 +167,15 @@ class RegistScreen extends Component {
                     <Row style={{  height: height*35,
                         justifyContent: 'center' }}>
                             <Text style={{fontSize: 15,color:'#999999'}} onPress={() => {
+                                this._handleIsOpenClick4()
+                            }}>游客登录</Text>
+                    </Row>
+                    {/* <Row style={{  height: height*35,
+                        justifyContent: 'center' }}>
+                            <Text style={{fontSize: 15,color:'#999999'}} onPress={() => {
                                 this._handleIsOpenClick3()
                             }}>其他方式登录</Text>
-                    </Row>
+                    </Row> */}
                      {/* <Row style={{  height: height*120,
                         justifyContent: 'center' }}>
                         <Col style={{  height: height*89 }}></Col>

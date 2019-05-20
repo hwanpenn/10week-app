@@ -1,20 +1,14 @@
 import React from 'react';
 import {
-  Image,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  View,
-  Button
+  View
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { viewurl } from '../cfg/cfg.js';
-
-import { MonoText } from '../components/StyledText';
-
-import Loading from '../components/Loading';
+import {  Row } from 'react-native-easy-grid';
+import {width, height} from "../constants/Layout";
 import Loadinggif from '../components/Loadinggif';
 // import Webviewtemp from './component/Webviewtemp';
 import { WebView,StatusBar} from 'react-native';
@@ -54,12 +48,12 @@ export default class VideoScreen extends React.Component {
     
     return (
       <View style={styles.container}>
-      <StatusBar barStyle='dark-content' />
-      <WebView
+       {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
+     <WebView scrollEnabled={false}
         // source={{uri: 'http://mderrick.github.io/react-html5video/'}}
         // source={{uri: 'https://video-react.js.org/'}}
         source={{uri: viewurl+'/mobile/videopagelist'}}
-        style={{marginTop: Platform.OS === 'ios' ?0:20}}
+        style={{marginTop: Platform.OS === 'ios' ?0:5}}
         useWebKit={true}
         mixedContentMode='always'
         renderLoading={this.renderLoading}

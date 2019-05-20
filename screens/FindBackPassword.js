@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Text,Item, Input,Content } from 'native-base';
+import { Text,Item, Input } from 'native-base';
 import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import {  Row, Grid } from 'react-native-easy-grid';
 import {appReduxChange, appReduxTest} from "../actions/app";
 import {width, height} from "../constants/Layout";
 import {connect} from "react-redux";
-import {AsyncStorage, Dimensions, Platform, StyleSheet,TouchableHighlight,Image,View,StatusBar} from "react-native";
-import { Ionicons } from '@expo/vector-icons';
+import {AsyncStorage, Platform, StyleSheet} from "react-native";
 import {urlDev} from "../constants/Url";
 import axios from "axios/index";
 import {Toast} from "antd-mobile-rn/lib/index.native";
@@ -88,7 +87,7 @@ class FindBackPassword extends Component {
         });
     };
     _handleIsOpenClick3 = () => {
-        AsyncStorage.setItem('firstOpen', JSON.stringify('false'), (error, result) => {
+        AsyncStorage.setItem('firstOpen','false', (error, result) => {
             if (!error) {
                 console.log("设置成功")
                 this.setState({ firstOpen: false });
@@ -99,32 +98,12 @@ class FindBackPassword extends Component {
         // const
         return (
             <Container>
-                {/*<StatusBar*/}
-                {/*// backgroundColor="blue"*/}
-                {/*backgroundColor={'green'}*/}
-                {/*barStyle="light-content"*/}
-                {/*/>*/}
-                {/*<Header />*/}
-                {/*<Header>*/}
-                    {/*<Left>*/}
-                        {/*<Button transparent>*/}
-                            {/*<Icon name='arrow-back' />*/}
-                        {/*</Button>*/}
-                    {/*</Left>*/}
-                    {/*<Body>*/}
-                    {/*<Title style={{fontSize: 18}}>找回密码</Title>*/}
-                    {/*</Body>*/}
-                    {/*<Right>*/}
-                        {/*/!*<Button transparent>*!/*/}
-                            {/*/!*<Icon name='menu' />*!/*/}
-                        {/*/!*</Button>*!/*/}
-                    {/*</Right>*/}
-                {/*</Header>*/}
-                <Row style={{  height: height*12 }}> </Row>
+              
+                <Row style={{  height: height*12 }}></Row>
                 <Header transparent>
                     <Left>
                         <Button onPress={() => this.props.navigation.goBack()} transparent>
-                            <Icon style={{marginLeft:width*15 }} name="arrow-back" />
+                            <Icon style={{marginLeft:width*15,color:Platform.OS === 'ios' ?'#1C86EE' : 'black' }} name="arrow-back" />
                         </Button>
                     </Left>
                     <Body>
@@ -137,19 +116,7 @@ class FindBackPassword extends Component {
                     </Right>
                 </Header>
                 <Grid>
-                    {/*<Row style={{ backgroundColor: '#635DB7', height: height*88 }}></Row>*/}
-                    {/*<Col style={{ backgroundColor: '#635DB7', height: height*88 }}></Col>*/}
-
-                    {/*<Row style={{  height: height*40 }}> </Row>*/}
-                    {/*<Row style={{  height: height*25,*/}
-                        {/*justifyContent: 'center' }}>*/}
-                        {/*<Col style={{width:  width*60,marginLeft:width*30 }}>*/}
-                            {/*<Ionicons name="ios-arrow-back" size={30} color="black" />*/}
-                        {/*</Col>*/}
-                        {/*<Col style={{ marginTop:height*5 ,marginLeft:width*55 }}>*/}
-                            {/*<Text style={{fontSize: 18}}>找回密码</Text>*/}
-                        {/*</Col>*/}
-
+                  
                     {/*</Row>*/}
                     <Row style={{  height: height*41 }}></Row>
                     <Row style={{  height: height*67,
@@ -171,13 +138,13 @@ class FindBackPassword extends Component {
                                 this._handleIsOpenClick()
                                 }} style={styles.gettingCode} disabled bordered rounded>
                                 <Text style={{fontSize: 10,color:'#868686',
-                                justifyContent: 'center',}}>{this.state.gettingCodeTime}秒后重新获取</Text>
+                                justifyContent: 'center',}}>{this.state.gettingCodeTime}{Platform.OS === 'ios' ?'秒后重新获取' : '秒'}</Text>
                                 </Button>:
                                 <Button onPress={() => {
                                 this._handleIsOpenClick()
                                 }} style={styles.getCode} bordered rounded>
                                 <Text style={{fontSize: 10,color:'#EB632E',
-                                justifyContent: 'center',}}>获取验证码</Text>
+                                justifyContent: 'center',}}>{Platform.OS === 'ios' ?'获取验证码' : '验证码'}</Text>
                                 </Button>}
                             </Item>
                         {/* </Content> */}

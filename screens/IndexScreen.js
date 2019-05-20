@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
 // import { Container, Header,Text,Item, Input, Icon,Content,Button } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import {appReduxChange, appReduxTest} from "../actions/app";
+import {appReduxChange} from "../actions/app";
 import {width, height} from "../constants/Layout";
 import {connect} from "react-redux";
-import {AsyncStorage, Dimensions, Platform, StyleSheet,TouchableHighlight,Image,View,StatusBar} from "react-native";
+import {AsyncStorage,  Platform, StyleSheet,Image,View,StatusBar} from "react-native";
 import {
-    ScrollView,
+    ScrollView
 } from 'react-native';
 // import {   } from 'native-base';
-import { Ionicons } from '@expo/vector-icons';
-import {  Footer, FooterTab, Badge } from 'native-base';
-import { Text,Item, Input,Content,DeckSwiper, Card, CardItem, Thumbnail } from 'native-base';
-import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
-import {urlDev} from "../constants/Url";
-import axios from "axios/index";
-import {Toast} from "antd-mobile-rn/lib/index.native";
+import { Text,Content } from 'native-base';
+import { Container, Header, Body, Right, Button, Icon, Title } from 'native-base';
 import { Carousel } from '@ant-design/react-native';
+import {Toast} from "antd-mobile-rn/lib/index.native";
+// import Orientation from 'react-native-orientation';
+// import { ScreenOrientation } from 'expo';
 // import { Grid } from '@ant-design/react-native';
 // import { Col, Row, Grid } from 'react-native-easy-grid';
 // import {width, height} from "./constants/Layout";
-
+// ScreenOrientation.allowAsync(ScreenOrientation.Orientation.PORTRAIT)
 
 const cards = [
     {
@@ -44,21 +42,36 @@ class IndexScreen extends Component {
     state={
         gettingCode:false,
         gettingCodeTime:0,
-        username:''
+        username:'',
+        vip:'false'
     };
     static navigationOptions = {
         header: null,
     };
+//     async componentWillMount() {
+//         ScreenOrientation.allowAsync(ScreenOrientation.Orientation.PORTRAIT);
+//         Orientation.lockToPortrait();
+//  }
     async componentDidMount(){
+        // Orientation.unlockAllOrientations();
         const thisTemp = this;
+        AsyncStorage.getItem('firstOpen')
+            .then((value) => {
+                console.log("firstOpen02---------")
+                console.log(value)
+            })
         AsyncStorage.getItem('username')
             .then((value) => {
+                console.log("value---------")
+                console.log(value)
                 thisTemp.setState({
                     username:value?value:''
                 })
             })
         AsyncStorage.getItem('vip')
             .then((value) => {
+                console.log("vip---------")
+                console.log(value)
                 thisTemp.setState({
                     vip:value?value:'false'
                 })
@@ -72,19 +85,24 @@ class IndexScreen extends Component {
         this.props.navigation.navigate( 'News');
     };
     handleMenuClick01 = () => {
+        // this.props.navigation.navigate( 'News'  ,{url:'/mobile/videopagelist'});
         this.props.navigation.navigate( 'Video');
     };
     handleMenuClick02 = () => {
         this.props.navigation.navigate( 'Rank');
     };
     handleMenuClick03 = () => {
-        this.props.navigation.navigate( 'BaseData');
+        if(this.state.username===''){
+            Toast.fail('请先登录',1);
+        }else{
+            this.props.navigation.navigate( 'BaseData');
+        }
     };
     handleMenuClick04 = () => {
         this.props.navigation.navigate( 'Recipe');
     };
     handleMenuClick05 = () => {
-        this.props.navigation.navigate( 'BaseDataVip');
+            this.props.navigation.navigate( 'BaseDataVip');
     };
     handleMenuClick06 = () => {
         this.props.navigation.navigate( 'VipDataList');
@@ -101,21 +119,75 @@ class IndexScreen extends Component {
     handleMenuClick10 = () => {
         this.props.navigation.navigate( 'Picture');
     };
+    handleMenuClick11 = () => {
+        console.log(this.state.username)
+        if(this.state.username===''){
+            Toast.fail('请先登录',1);
+        }else{
+            // alert('等待付款')
+            this.props.navigation.navigate( 'Rank');
+        }
+        // this.props.navigation.navigate( 'Picture');
+    };
+    _handleIsOpenClickLogin = () => {
+        AsyncStorage.setItem('username', (''), (error, result) => {
+            if (!error) {
+                // console.log("设置成功")
+                this.setState({ username: '' });
+            }
+            AsyncStorage.setItem('vip', ('false'), (error, result) => {
+                if (!error) {
+                    // console.log("设置成功")
+                    this.setState({ username: '' });
+                }
+                this.props.navigation.navigate( 'Login');
+            });
+        });
+        // this.props.navigation.navigate( 'Reset');
+    };
+    _handleIsOpenClickLogout = () => {
+        AsyncStorage.setItem('username', (''), (error, result) => {
+            if (!error) {
+                // console.log("设置成功")
+                this.setState({ username: '' });
+            }
+            AsyncStorage.setItem('vip', ('false'), (error, result) => {
+                if (!error) {
+                    // console.log("设置成功")
+                    this.setState({ username: '' });
+                }
+                this.props.navigation.navigate( 'Login');
+            });
+        });
+        // this.props.navigation.navigate( 'Reset');
+    };
    
     render() {
         // const
         return (
-            <Container>
+            <Container style={styles.container}>
+            {Platform.OS === 'ios' ? 
+            <StatusBar backgroundColor={'black'}  barStyle='dark-content' />
+             : <Row style={{ height: height*20 , backgroundColor: 'black'}}>
+            <StatusBar backgroundColor={'black'}  barStyle='dark-content' />
+            </Row>}
+               
+                
                 <Row style={{  height: height*10 }}></Row>
                 <Header style={{  marginTop: -height*22 }} transparent>
-                    <Body style={{}} >
-                    <Title style={{fontSize: 25,width:width*300,marginLeft:width*35}}>欢迎加入十周挑战</Title>
+                    <Body >
+                    <Title style={{marginLeft:Platform.OS === 'ios' ?width*35 : -width*35 ,fontSize: 25,width:width*300,color:Platform.OS === 'ios' ?'black' : 'black'}}>欢迎加入十周挑战</Title>
                     </Body>
                     <Right>
-                        <Button transparent>
-                            <Icon name="envelope" type='SimpleLineIcons'/>
-                            <Badge style={{ height: height*15,width:width*15,marginLeft:-(width*8),marginTop:-(width*0)}}><Text style={{marginLeft:-(width*3),marginTop:-(width*5),fontSize: 10}} >1</Text></Badge>
-                        </Button>
+                    {this.state.username===''?<Button  onPress={() => {
+                        this._handleIsOpenClickLogin()
+                    }} transparent>
+                        <Icon style={{fontSize: 20, color: 'red'}} name="login" type='SimpleLineIcons'/>
+                    </Button>:<Button  onPress={() => {
+                        this._handleIsOpenClickLogout()
+                    }} transparent>
+                        <Icon style={{fontSize: 20, color: 'red'}} name="logout" type='SimpleLineIcons'/>
+                    </Button>}
                     </Right>
                 </Header>
                 <Carousel
@@ -224,7 +296,7 @@ class IndexScreen extends Component {
                           <Button onPress={() => {
                               this.handleMenuClick02()
                           }} style={styles.menubutton} rounded>
-                              <Text style={{fontSize: 19}}>查看排行榜</Text>
+                              <Text style={{fontSize: 19}}>查看榜单</Text>
                           </Button>
                       </View>
                       </Row>
@@ -258,8 +330,49 @@ class IndexScreen extends Component {
               </Col>
           </Row>
                     <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
-                        
-                    <Row style={{  height: height*182.5,
+                     
+                    {this.state.username===''? <Row style={{  height: height*182.5,
+                    }}>
+                   <Col style={{width:  width*182.5 }}>
+                       <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
+                       <View style={{
+                           position: "absolute",
+                           zIndex: 9998,
+                           alignItems: 'center',justifyContent : "center"
+                       }}>
+                           <View style={{flex: 1}}/>
+                           <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
+                           <Text style={{fontSize: 25,color:"black"}}>十周挑战</Text>
+                           </Row>
+                           <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
+                           <Text style={{fontSize: 15,color:"grey"}}>心动不如行动</Text>
+                           </Row>
+                           <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
+                           <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
+                               <Button onPress={() => {
+                                   this.handleMenuClick11()
+                               }} style={styles.menubutton} rounded>
+                                   <Text style={{fontSize: 19}}>加入会员</Text>
+                               </Button>
+                           </View>
+                           </Row>
+                       </View>
+                   </Col>
+                   <Col style={{width:  width*182.5,marginLeft:width*3 ,}}>
+                   <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
+                   <View style={{
+                       position: "absolute",
+                       zIndex: 9998,
+                       alignItems: 'center',justifyContent : "center"
+                   }}>
+                   </View>
+                   </Col>
+               </Row>:<Row></Row>}
+            <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
+                         
+
+
+            {this.state.username!==''?<Row style={{  height: height*182.5,
                              }}>
                             <Col style={{width:  width*182.5 }}>
                                 <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
@@ -312,10 +425,12 @@ class IndexScreen extends Component {
                                 </Row>
                             </View>
                             </Col>
-                        </Row>
+                        </Row>:<Row></Row>}
                         <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
                         
-                        <Row style={{  height: height*182.5,
+
+
+                        {this.state.username!==''?<Row style={{  height: height*182.5,
                              }}>
                             <Col style={{width:  width*182.5 }}>
                                 <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
@@ -326,7 +441,7 @@ class IndexScreen extends Component {
                                 }}>
                                     <View style={{flex: 1}}/>
                                     <Row style={{  height: height*65, alignItems: 'center',justifyContent : "center" }}>
-                                    <Text style={{fontSize: 25,color:"black"}}>打卡数据</Text>
+                                    <Text style={{fontSize: 25,color:"black"}}>打卡记录</Text>
                                     </Row>
                                     <Row style={{  height: height*30, alignItems: 'center',justifyContent : "center" }}>
                                     <Text style={{fontSize: 15,color:"grey"}}>打卡数据统计</Text>
@@ -368,9 +483,11 @@ class IndexScreen extends Component {
                                 </Row>
                             </View>
                             </Col>
-                        </Row>
+                        </Row>:<Row></Row>}
                         <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
-                        <Row style={{  height: height*182.5,
+                        
+                        
+                        {this.state.username!==''?<Row style={{  height: height*182.5,
                              }}>
                             <Col style={{width:  width*182.5 }}>
                                 <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
@@ -423,9 +540,11 @@ class IndexScreen extends Component {
                                 </Row>
                             </View>
                             </Col>
-                        </Row>
+                        </Row>:<Row></Row>}
                         <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
-                        <Row style={{  height: height*182.5,
+                        
+                        
+                        {this.state.username!==''?<Row style={{  height: height*182.5,
                         }}>
                        <Col style={{width:  width*182.5 }}>
                            <Image style={start.backgroundImage} source={require('../assets/images/menu11.png')}/>
@@ -453,7 +572,7 @@ class IndexScreen extends Component {
                            </View>
                            
                        </Col>
-                   </Row>
+                   </Row>:<Row></Row>}
                    <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
                        
                     </Grid>

@@ -88,10 +88,8 @@ class IndexScreen extends Component {
         // const
         return (
             <Container>
-
-                <Row style={{  height: height*12 }}> </Row>
+                <Row style={{  height: height*12 }}></Row>
                 <Header transparent>
-                  
                     <Body style={{}} >
                     <Title style={{fontSize: 25,width:width*300,marginLeft:width*60}}>欢迎{this.state.username.slice(0,1)}加入十周挑战</Title>
 

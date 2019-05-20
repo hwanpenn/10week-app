@@ -1,14 +1,11 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
     Button,
-    StatusBar,
     StyleSheet,
     View,
     Text
 } from 'react-native';
-import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import {appReduxChange, appReduxTest} from "../actions/app";
 import {connect} from "react-redux";
 

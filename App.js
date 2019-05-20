@@ -6,7 +6,8 @@ import store from './store'
 import {width, height} from "./constants/Layout";
 import {Provider} from 'react-redux'
 import {  Button, Text } from 'native-base';
-import { Container, Header, Left, Body, Right, Title } from 'native-base';
+// import { ScreenOrientation } from 'expo';
+
 
 export default class App extends React.Component {
 
@@ -23,15 +24,26 @@ export default class App extends React.Component {
           'Roboto': require('native-base/Fonts/Roboto.ttf'),
           'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
       });
+      await Font.loadAsync(
+        'antoutline',
+        // eslint-disable-next-line
+        require('@ant-design/icons-react-native/fonts/antoutline.ttf')
+      );
+  
+      await Font.loadAsync(
+        'antfill',
+        // eslint-disable-next-line
+        require('@ant-design/icons-react-native/fonts/antfill.ttf')
+      );
       AsyncStorage.getItem('firstOpen')
           .then((value) => {
-              if(value===null){
-                  // this.setState({ firstOpen: true });
+              if( value !== 'false'){
+                  this.setState({ firstOpen: true });
               }
           })
   }
   _handleIsOpenClick = () => {
-        AsyncStorage.setItem('firstOpen', JSON.stringify('false'), (error, result) => {
+        AsyncStorage.setItem('firstOpen', 'false', (error, result) => {
             if (!error) {
                 // console.log("设置成功")
                 this.setState({ firstOpen: false });

@@ -70,7 +70,7 @@ class RegistScreen extends Component {
         }, 1000);
     };
     _handleIsOpenClick1 = () => {
-        AsyncStorage.setItem('firstOpen', JSON.stringify('false'), (error, result) => {
+        AsyncStorage.setItem('firstOpen', ('false'), (error, result) => {
             if (!error) {
                 console.log("设置成功")
                 this.setState({ firstOpen: false });
@@ -99,8 +99,8 @@ class RegistScreen extends Component {
                     {/*</Left>*/}
                     <Body style={{}} >
                     <Title style={{fontSize: 25,width:width*300,marginLeft:width*60}}>欢迎{this.state.username.slice(0,1)}加入十周挑战</Title>
-                    // <Title style={{fontSize: 25,width:width*300,marginLeft:width*60}}>欢迎{this.state.username.substring(realName.length-1)}加入十周挑战</Title>
-                    // <Title style={{fontSize: 25,width:width*300,marginLeft:width*60}}>欢迎{this.state.username.substring(realName.length-1)}加入十周挑战</Title>
+                    // <Title style={{fontSize: 25,width:width*300,marginLeft:width*60}}>欢迎{this.state.username.substring(username.length-1)}加入十周挑战</Title>
+                    // <Title style={{fontSize: 25,width:width*300,marginLeft:width*60}}>欢迎{this.state.username.substring(username.length-1)}加入十周挑战</Title>
                     </Body>
                     <Right>
                         <Button transparent>

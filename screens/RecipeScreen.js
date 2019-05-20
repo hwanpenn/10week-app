@@ -1,21 +1,16 @@
 import React from 'react';
 import {
-  Image,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
-  Button,
   AsyncStorage
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { viewurl } from '../cfg/cfg.js';
-
-import { MonoText } from '../components/StyledText';
+import {  Row } from 'react-native-easy-grid';
+import {width, height} from "../constants/Layout";
 import axios from "axios/index";
-import Loading from '../components/Loading';
 import Loadinggif from '../components/Loadinggif';
 // import Webviewtemp from './component/Webviewtemp';
 import { WebView,StatusBar} from 'react-native';
@@ -80,10 +75,10 @@ handleMessage = (e)=> {
     
     return (
       <View style={styles.container}>
-      <StatusBar barStyle='dark-content' />
-      <WebView
+       {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
+     <WebView scrollEnabled={false}
         source={{uri: viewurl+'/mobile/recipepage/'+this.state.vipDay}}
-        style={{marginTop: Platform.OS === 'ios' ?0:20}}
+        style={{marginTop: Platform.OS === 'ios' ?0:5}}
         useWebKit={true}
         mixedContentMode='always'
         renderLoading={this.renderLoading}

@@ -1,21 +1,15 @@
 import React from 'react';
 import {
-  Image,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
-  Button,
   AsyncStorage
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { viewurl } from '../cfg/cfg.js';
-
-import { MonoText } from '../components/StyledText';
-
-import Loading from '../components/Loading';
+import {  Row } from 'react-native-easy-grid';
+import { height} from "../constants/Layout";
 import Loadinggif from '../components/Loadinggif';
 // import Webviewtemp from './component/Webviewtemp';
 import { WebView,StatusBar} from 'react-native';
@@ -43,18 +37,44 @@ export default class VipDataListScreen extends React.Component {
   renderLoading = ()=>{
     return(<Loadinggif />)
   }
+  handleMessage = (e)=> {
+
+    if(e.nativeEvent.data==="Index"){
+      this.props.navigation.navigate('Home');
+    }
+  }
 
   render() {
+    const patchPostMessageFunction = function() {
+      var originalPostMessage = window.postMessage;
+    
+      var patchedPostMessage = function(message, targetOrigin, transfer) { 
+        originalPostMessage(message, targetOrigin, transfer);
+      };
+    
+      patchedPostMessage.toString = function() { 
+        return String(Object.hasOwnProperty).replace('hasOwnProperty', 'postMessage');
+      };
+    
+      window.postMessage = patchedPostMessage;
+    };
+    
+    const patchPostMessageJsCode = '(' + String(patchPostMessageFunction) + ')();';
+    
     return (
       <View style={styles.container}>
-      <StatusBar barStyle='dark-content' />
-      <WebView
+       {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
+     <WebView scrollEnabled={false}
         source={{uri: viewurl+"/mobile/vipdatalistpage/"+this.state.id}}
-        style={{marginTop: Platform.OS === 'ios' ?0:20}}
+        style={{marginTop: Platform.OS === 'ios' ?0:5}}
         useWebKit={true}
         mixedContentMode='always'
         renderLoading={this.renderLoading}
         startInLoadingState
+        injectedJavaScript={patchPostMessageJsCode}
+        onMessage={(e) => {
+          this.handleMessage(e)
+      }}
       />
     </View>
     );

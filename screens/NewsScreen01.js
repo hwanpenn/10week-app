@@ -3,8 +3,7 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View,
-  AsyncStorage
+  View
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { viewurl } from '../cfg/cfg.js';
@@ -13,36 +12,22 @@ import {width, height} from "../constants/Layout";
 import Loadinggif from '../components/Loadinggif';
 // import Webviewtemp from './component/Webviewtemp';
 import { WebView,StatusBar} from 'react-native';
-import axios from "axios/index";
-export default class TaskShowScreen extends React.Component {
+
+export default class NewsScreen extends React.Component {
   static navigationOptions = {
     header: null,
-    // headerTitle: 'null'
+  //   headerTitle: '十周新闻'
     
   };
-  state={
-    id:'',
-    vipDay:'1'
-};
-  async componentDidMount(){
-    const thisTemp = this;
-    AsyncStorage.getItem('id')
-        .then((value) => {
-          thisTemp.setState({
-              id:value?value:'5cae30c19a6c6264b51fc555'
-            })
-            axios.get('/api/user/'+value?value:'5cae30c19a6c6264b51fc555'
-        ).then( (response) => {
-        console.log(response.data.data)
-          this.setState({
-            vipDay:response.data.data.vipDay               
-                      })
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-            // alert(value)
-        })
+  state = {
+    url:'/mobile/newspagelist'
+  }
+  componentDidMount(){
+    let url = this.props.navigation.state.params.url;
+    console.log(url)
+    this.setState({
+      url:'/mobile/newspagelist'
+    })
 }
   renderLoading = ()=>{
     return(<Loadinggif />)
@@ -52,7 +37,7 @@ export default class TaskShowScreen extends React.Component {
     if(e.nativeEvent.data==="Index"){
       this.props.navigation.navigate('Home');
     }
-  }
+}
 
   render() {
     const patchPostMessageFunction = function() {
@@ -70,12 +55,11 @@ export default class TaskShowScreen extends React.Component {
     };
     
     const patchPostMessageJsCode = '(' + String(patchPostMessageFunction) + ')();';
-    
     return (
       <View style={styles.container}>
-       {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
+      {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
      <WebView scrollEnabled={false}
-        source={{uri: viewurl+"/mobile/taskshowpage/"+this.state.vipDay}}
+        source={{uri: viewurl+this.state.url}}
         style={{marginTop: Platform.OS === 'ios' ?0:5}}
         useWebKit={true}
         mixedContentMode='always'
