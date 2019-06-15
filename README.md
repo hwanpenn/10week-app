@@ -1,1 +1,1 @@
-10week-api
+10week-app
