@@ -11,7 +11,6 @@ import { viewurl } from '../cfg/cfg.js';
 import {  Row } from 'react-native-easy-grid';
 import { height} from "../constants/Layout";
 import Loadinggif from '../components/Loadinggif';
-// import Webviewtemp from './component/Webviewtemp';
 import { WebView,StatusBar} from 'react-native';
 
 export default class VipDataListScreen extends React.Component {
@@ -30,9 +29,7 @@ export default class VipDataListScreen extends React.Component {
           thisTemp.setState({
               id:value?value:'5cae30c19a6c6264b51fc555'
             })
-            // alert(value)
         })
-    // alert(width)
 }
   renderLoading = ()=>{
     return(<Loadinggif />)

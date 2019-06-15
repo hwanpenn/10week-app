@@ -36,7 +36,6 @@ export default class NewsScreen extends React.Component {
             })
             axios.get('/api/user/'+value?value:'5cae30c19a6c6264b51fc555'
         ).then( (response) => {
-        console.log(response.data.data)
           this.setState({
             vipDay:response.data.data.vipDay               
                       })
@@ -44,9 +43,7 @@ export default class NewsScreen extends React.Component {
         .catch(function (error) {
             console.log(error);
         });
-            // alert(value)
         })
-    // alert(width)
 }
 
 handleMessage = (e)=> {

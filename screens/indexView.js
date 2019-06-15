@@ -89,18 +89,10 @@ class RegistScreen extends Component {
         // const
         return (
             <Container>
-                {/*<Header />*/}
                 <Row style={{  height: height*12 }}> </Row>
                 <Header transparent>
-                    {/*<Left>*/}
-                        {/*<Button transparent>*/}
-                            {/*<Icon style={{marginLeft:width*15 }} name="arrow-back" />*/}
-                        {/*</Button>*/}
-                    {/*</Left>*/}
                     <Body style={{}} >
                     <Title style={{fontSize: 25,width:width*300,marginLeft:width*60}}>欢迎{this.state.username.slice(0,1)}加入十周挑战</Title>
-                    // <Title style={{fontSize: 25,width:width*300,marginLeft:width*60}}>欢迎{this.state.username.substring(username.length-1)}加入十周挑战</Title>
-                    // <Title style={{fontSize: 25,width:width*300,marginLeft:width*60}}>欢迎{this.state.username.substring(username.length-1)}加入十周挑战</Title>
                     </Body>
                     <Right>
                         <Button transparent>
@@ -114,161 +106,43 @@ class RegistScreen extends Component {
                     dataSource={cards}
                     renderItem={item =>
                         <Card style={{width: width*351, elevation: 3 ,marginLeft:width*12}}>
-                            {/*<CardItem>*/}
-                                {/*<Left>*/}
-                                    {/*<Thumbnail source={item.image} />*/}
-                                    {/*<Body>*/}
-                                    {/*<Text>{item.text}</Text>*/}
-                                    {/*<Text note>NativeBase</Text>*/}
-                                    {/*</Body>*/}
-                                {/*</Left>*/}
-                            {/*</CardItem>*/}
                             <CardItem  cardBody>
                                 <Image style={{ width: width*351,height: height*137.5, flex: 1 }} source={item.image} />
                             </CardItem>
-                            {/*<CardItem>*/}
-                                {/*<Icon name="heart" style={{ color: '#ED4A6A' }} />*/}
-                                {/*<Text>{item.name}</Text>*/}
-                            {/*</CardItem>*/}
                         </Card>
                     }
                 />
                 <Content />
                 <ScrollView style={styles.container1} contentContainerStyle={styles.contentContainer}>
                     <Grid>
-                        {/*<Col style={{  height: 200 }}></Col>*/}
-                        {/*<Col style={{ , height: 200 }}></Col>*/}
                         <Row style={{  height: height*182.5,
                              }}>
-                            {/*<Text style={{fontSize: 18}}>重置密码</Text>*/}
                             <Col style={{width:  width*182.5 ,}}>
                                 <Image style={start.backgroundImage} source={require('../assets/images/menu1.png')}/>
-                                {/*<Row style={{ backgroundColor: '#635DB7', height: height*88 }}></Row>*/}
-                                {/*<Row style={{ backgroundColor: '#635DB7', height: height*88 }}></Row>*/}
-                                {/*<Row style={{ backgroundColor: '#635DB7', height: height*88 }}></Row>*/}
-                                {/*<Ionicons name="ios-arrow-back" size={30} color="black" />*/}
-                                {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                    {/*this._handleClickVideo()*/}
-                                {/*}}>*/}
-                                    {/*<Image style={start.backgroundImage1} source={require('../assets/images/menu1.png')}/>*/}
-                                {/*</TouchableHighlight>*/}
                             </Col>
                             <Col style={{width:  width*182.5,marginLeft:width*3 ,}}>
                                 <Image style={start.backgroundImage} source={require('../assets/images/menu2.png')}/>
-                                {/*<Grid>*/}
-                                    {/*<Row style={{  height: height*25,marginTop:height*20*/}
-                                    {/*}}>*/}
-                                        {/*<Text style={{fontSize: 18}}>私人订制</Text>*/}
-                                    {/*</Row>*/}
-                                    {/*<Row style={{ height: height*16.5,marginTop:height*20 }}>*/}
-                                        {/*<Text style={{fontSize: 12}}>快速私人订制运动方案</Text>*/}
-                                    {/*</Row>*/}
-                                    {/*<Row style={{  height: height*40,marginTop:height*33.5*/}
-                                    {/*}}>*/}
-                                        {/*<Button onPress={() => {*/}
-                                            {/*this._handleIsOpenClick1()*/}
-                                        {/*}} style={styles.registButton} rounded>*/}
-                                            {/*<Text style={{ fontSize:22 }} >查看定制方案</Text>*/}
-                                        {/*</Button>*/}
-                                    {/*</Row>*/}
-                                {/*</Grid>*/}
-                                {/*<Text style={{fontSize: 18}}>重置密码</Text>*/}
-                                {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                    {/*this._handleClickHealth()*/}
-                                {/*}}>*/}
-                                    {/*<Image style={start.backgroundImage2} source={require('../assets/images/menu2.png')}/>*/}
-                                {/*</TouchableHighlight>*/}
                             </Col>
                         </Row>
                         <Row style={{ height: height*3 }}></Row>
                         <Row style={{  height: height*182.5,
                             }}>
-                            {/*<Text style={{fontSize: 18}}>重置密码</Text>*/}
                             <Col style={{width:  width*182.5 ,}}>
                                 <Image style={start.backgroundImage} source={require('../assets/images/menu3.png')}/>
-                                {/*<Ionicons name="ios-arrow-back" size={30} color="black" />*/}
-                                {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                    {/*this._handleClickVideo()*/}
-                                {/*}}>*/}
-                                    {/*<Image style={start.backgroundImage1} source={require('../assets/images/menu1.png')}/>*/}
-                                {/*</TouchableHighlight>*/}
                             </Col>
                             <Col style={{width:  width*182.5,marginLeft:width*3 }}>
                                 <Image style={start.backgroundImage} source={require('../assets/images/menu4.png')}/>
-                                {/*<Text style={{fontSize: 18}}>重置密码</Text>*/}
-                                {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                    {/*this._handleClickHealth()*/}
-                                {/*}}>*/}
-                                    {/*<Image style={start.backgroundImage2} source={require('../assets/images/menu2.png')}/>*/}
-                                {/*</TouchableHighlight>*/}
                             </Col>
                         </Row>
                         <Row style={{ height: height*3 }}></Row>
                         <Row style={{  height: height*182.5,}}>
-                            {/*<Text style={{fontSize: 18}}>重置密码</Text>*/}
                             <Col style={{width:  width*182.5 ,}}>
                                 <Image style={start.backgroundImage} source={require('../assets/images/menu5.png')}/>
-                                {/*<Ionicons name="ios-arrow-back" size={30} color="black" />*/}
-                                {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                    {/*this._handleClickVideo()*/}
-                                {/*}}>*/}
-                                    {/*<Image style={start.backgroundImage1} source={require('../assets/images/menu1.png')}/>*/}
-                                {/*</TouchableHighlight>*/}
                             </Col>
                             <Col style={{width:  width*182.5,marginLeft:width*3 }}>
-                                {/*<Text style={{fontSize: 18}}>重置密码</Text>*/}
-                                {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                    {/*this._handleClickHealth()*/}
-                                {/*}}>*/}
-                                    {/*<Image style={start.backgroundImage2} source={require('../assets/images/menu2.png')}/>*/}
-                                {/*</TouchableHighlight>*/}
                             </Col>
                         </Row>
                     </Grid>
-
-                    {/*<View style={{flexDirection : "row", justifyContent : "flex-start",height:191,marginLeft:Platform.OS === "ios" ? 0 : 0,marginTop:Platform.OS === "ios" ? 0 : 0  }} >*/}
-                        {/*<View style={{padding:10,width: 183,height:191,marginLeft:Platform.OS === "ios" ? 0 : 0,marginTop:Platform.OS === "ios" ? 0 : 0  }} >*/}
-                            {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                {/*this._handleClickVideo()*/}
-                            {/*}}>*/}
-                                {/*<Image style={start.backgroundImage1} source={require('../assets/images/menu1.png')}/>*/}
-                            {/*</TouchableHighlight>*/}
-                        {/*</View>*/}
-                        {/*<View style={{width: 183,height:156,marginLeft:Platform.OS === "ios" ? 10 : 8,marginTop:Platform.OS === "ios" ? 0 : 0  }} >*/}
-                            {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                {/*this._handleClickHealth()*/}
-                            {/*}}>*/}
-                                {/*<Image style={start.backgroundImage2} source={require('../assets/images/menu2.png')}/>*/}
-                            {/*</TouchableHighlight>*/}
-                        {/*</View>*/}
-                    {/*</View>*/}
-                    {/*<View style={{flexDirection : "row", justifyContent : "flex-start",height:191,marginLeft:Platform.OS === "ios" ? 0 : 0,marginTop:Platform.OS === "ios" ? 0 : 0  }} >*/}
-                        {/*<View style={{padding:10,width: 183,height:156,marginLeft:Platform.OS === "ios" ? 0 : 0,marginTop:Platform.OS === "ios" ? 0 : 0  }} >*/}
-                            {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                {/*this._handleClickPunch()*/}
-                            {/*}}>*/}
-                                {/*<Image style={start.backgroundImage3} source={require('../assets/images/menu3.png')}/>*/}
-                            {/*</TouchableHighlight>*/}
-                        {/*</View>*/}
-                        {/*<View style={{width: 183,height:191,marginLeft:Platform.OS === "ios" ? 10 : 8,marginTop:Platform.OS === "ios" ? 0 : 0  }} >*/}
-                            {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                {/*this._handleClickCustom()*/}
-                            {/*}}>*/}
-                                {/*<Image style={start.backgroundImage4} source={require('../assets/images/menu4.png')}/>*/}
-                            {/*</TouchableHighlight>*/}
-                        {/*</View>*/}
-                    {/*</View>*/}
-                    {/*<View style={{flexDirection : "row", justifyContent : "flex-start",height:191,marginLeft:Platform.OS === "ios" ? 0 : 0,marginTop:Platform.OS === "ios" ? 0 : 0  }} >*/}
-                        {/*<View style={{padding:10,width: 183,height:156,marginLeft:Platform.OS === "ios" ? 0 : 0,marginTop:Platform.OS === "ios" ? 0 : 0  }} >*/}
-                            {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                {/*this._handleClickWorkout()*/}
-                            {/*}}>*/}
-                                {/*<Image style={start.backgroundImage5} source={require('../assets/images/menu5.png')}/>*/}
-                            {/*</TouchableHighlight>*/}
-                        {/*</View>*/}
-                    {/*</View>*/}
-
-
                 </ScrollView>
                 <Footer style={{height:height*49,backgroundColor: '#ffffff'}}>
                     <FooterTab >
@@ -298,46 +172,6 @@ class RegistScreen extends Component {
     }
 }
 
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//     },
-//     getCode: {
-//         width: width*85,
-//         height: height*26,
-//         // backgroundColor: '#EB632E',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         marginTop:width*10,
-//         borderStyle:'solid',
-//         borderWidth:1,
-//         borderColor:'#EB632E',
-//     },
-//     gettingCode: {
-//         width: width*85,
-//         height: height*26,
-//         // backgroundColor: '#EB632E',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         marginTop:width*10,
-//         borderStyle:'solid',
-//         borderWidth:1,
-//         borderColor:'#868686',
-//     },
-//     welcomeWord: {
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//     },
-//     registButton: {
-//         width: width*200,
-//         height:height*49,
-//         backgroundColor: '#EB632E',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//     }
-// });
 const styles = StyleSheet.create({
     container1: {
         flex: 1,

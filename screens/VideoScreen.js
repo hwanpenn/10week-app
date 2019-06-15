@@ -10,7 +10,6 @@ import { viewurl } from '../cfg/cfg.js';
 import {  Row } from 'react-native-easy-grid';
 import {width, height} from "../constants/Layout";
 import Loadinggif from '../components/Loadinggif';
-// import Webviewtemp from './component/Webviewtemp';
 import { WebView,StatusBar} from 'react-native';
 
 export default class VideoScreen extends React.Component {
@@ -26,6 +25,9 @@ export default class VideoScreen extends React.Component {
 
     if(e.nativeEvent.data==="Index"){
       this.props.navigation.navigate('Home');
+    }
+    if(e.nativeEvent.data==="/mobile/newspagelist"){
+      this.props.navigation.navigate('News');
     }
 }
 
@@ -50,8 +52,6 @@ export default class VideoScreen extends React.Component {
       <View style={styles.container}>
        {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
      <WebView scrollEnabled={false}
-        // source={{uri: 'http://mderrick.github.io/react-html5video/'}}
-        // source={{uri: 'https://video-react.js.org/'}}
         source={{uri: viewurl+'/mobile/videopagelist'}}
         style={{marginTop: Platform.OS === 'ios' ?0:5}}
         useWebKit={true}

@@ -15,6 +15,7 @@ import ChartScreen from '../screens/ChartScreen';
 import VipDataListScreen from '../screens/VipDataListScreen';
 import PictureScreen from '../screens/PictureScreen';
 import IndexScreen from '../screens/IndexScreen';
+// import MainTabNavigator from './MainTabNavigator';
 
 const AuthStack = createStackNavigator({
     

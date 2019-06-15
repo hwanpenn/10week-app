@@ -10,25 +10,30 @@ import { viewurl } from '../cfg/cfg.js';
 import {  Row } from 'react-native-easy-grid';
 import {width, height} from "../constants/Layout";
 import Loadinggif from '../components/Loadinggif';
-// import Webviewtemp from './component/Webviewtemp';
 import { WebView,StatusBar} from 'react-native';
+import  {DeviceEventEmitter} from 'react-native';
 
 export default class NewsScreen extends React.Component {
+  webview = null;
+  state={
+    date:'',
+    targetUrl:''
+  };
+  async componentDidMount(){
+    this.subscription = DeviceEventEmitter.addListener('targetUrl', (value)=>this.setState({
+      targetUrl:value
+    }))
+}
+refreshData(targetUrl,thisOBj) {
+};
+componentWillUnmount() {
+  this.subscription.remove();
+};
   static navigationOptions = {
     header: null,
   //   headerTitle: '十周新闻'
     
   };
-  state = {
-    url:'/mobile/newspagelist'
-  }
-  componentDidMount(){
-    let url = this.props.navigation.state.params.url;
-    console.log(url)
-    this.setState({
-      url:'/mobile/newspagelist'
-    })
-}
   renderLoading = ()=>{
     return(<Loadinggif />)
   }
@@ -37,6 +42,9 @@ export default class NewsScreen extends React.Component {
     if(e.nativeEvent.data==="Index"){
       this.props.navigation.navigate('Home');
     }
+}
+handleNavigationChange = (newNav)=> {
+  console.log(newNav)
 }
 
   render() {
@@ -58,19 +66,11 @@ export default class NewsScreen extends React.Component {
     return (
       <View style={styles.container}>
       {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
-     <WebView scrollEnabled={false}
-        source={{uri: viewurl+this.state.url}}
-        style={{marginTop: Platform.OS === 'ios' ?0:5}}
-        useWebKit={true}
-        mixedContentMode='always'
-        renderLoading={this.renderLoading}
-        startInLoadingState
-        injectedJavaScript={patchPostMessageJsCode}
-        onMessage={(e) => {
-          this.handleMessage(e)
-      }}
-      />
-    </View>
+    
+      <Text >
+      {this.state.targetUrl?this.state.targetUrl:"控制"}
+        </Text>
+      </View>
     );
   }
 

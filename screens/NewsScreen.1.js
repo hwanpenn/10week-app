@@ -3,8 +3,7 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View,
-  AsyncStorage
+  View
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { viewurl } from '../cfg/cfg.js';
@@ -13,24 +12,15 @@ import {width, height} from "../constants/Layout";
 import Loadinggif from '../components/Loadinggif';
 import { WebView,StatusBar} from 'react-native';
 
-export default class TaskScreen extends React.Component {
+export default class NewsScreen extends React.Component {
   static navigationOptions = {
     header: null,
-    // headerTitle: 'null'
+  //   headerTitle: '十周新闻'
     
   };
   state={
-    id:''
-};
-  async componentDidMount(){
-    const thisTemp = this;
-    AsyncStorage.getItem('id')
-        .then((value) => {
-          thisTemp.setState({
-              id:value?value:'5cae30c19a6c6264b51fc555'
-            })
-        })
-}
+    targetUrl:'/mobile/newspagelist'
+  };
   renderLoading = ()=>{
     return(<Loadinggif />)
   }
@@ -38,6 +28,9 @@ export default class TaskScreen extends React.Component {
 
     if(e.nativeEvent.data==="Index"){
       this.props.navigation.navigate('Home');
+    }
+    if(e.nativeEvent.data==="/mobile/videopagelist"){
+      this.props.navigation.navigate('Video');
     }
 }
 
@@ -57,12 +50,11 @@ export default class TaskScreen extends React.Component {
     };
     
     const patchPostMessageJsCode = '(' + String(patchPostMessageFunction) + ')();';
-    
     return (
       <View style={styles.container}>
-       {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
+      {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
      <WebView scrollEnabled={false}
-        source={{uri: viewurl+"/mobile/taskpage/"+this.state.id}}
+        source={{uri: viewurl+this.state.targetUrl}}
         style={{marginTop: Platform.OS === 'ios' ?0:5}}
         useWebKit={true}
         mixedContentMode='always'

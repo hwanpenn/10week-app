@@ -8,7 +8,6 @@ import {AsyncStorage, Dimensions, Platform, StyleSheet,TouchableHighlight,Image,
 import {
     ScrollView,
 } from 'react-native';
-// import {   } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import {  Footer, FooterTab, Badge } from 'native-base';
 import { Text,Item, Input,Content,DeckSwiper, Card, CardItem, Thumbnail } from 'native-base';
@@ -17,9 +16,6 @@ import {urlDev} from "../constants/Url";
 import axios from "axios/index";
 import {Toast} from "antd-mobile-rn/lib/index.native";
 import { Carousel } from '@ant-design/react-native';
-// import { Grid } from '@ant-design/react-native';
-// import { Col, Row, Grid } from 'react-native-easy-grid';
-// import {width, height} from "./constants/Layout";
 
 
 const cards = [
@@ -297,24 +293,11 @@ class IndexScreen extends Component {
                         <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
                         <Row style={{  height: height*182.5,
                             }}>
-                            {/*<Text style={{fontSize: 18}}>重置密码</Text>*/}
                             <Col style={{width:  width*182.5 ,}}>
                                 <Image style={start.backgroundImage} source={require('../assets/images/menu3.png')}/>
-                                {/*<Ionicons name="ios-arrow-back" size={30} color="black" />*/}
-                                {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                    {/*this._handleClickVideo()*/}
-                                {/*}}>*/}
-                                    {/*<Image style={start.backgroundImage1} source={require('../assets/images/menu1.png')}/>*/}
-                                {/*</TouchableHighlight>*/}
                             </Col>
                             <Col style={{width:  width*182.5,marginLeft:width*3 }}>
                                 <Image style={start.backgroundImage} source={require('../assets/images/menu4.png')}/>
-                                {/*<Text style={{fontSize: 18}}>重置密码</Text>*/}
-                                {/*<TouchableHighlight underlayColor="rgba(52, 52, 52, 0)" onPress={() => {*/}
-                                    {/*this._handleClickHealth()*/}
-                                {/*}}>*/}
-                                    {/*<Image style={start.backgroundImage2} source={require('../assets/images/menu2.png')}/>*/}
-                                {/*</TouchableHighlight>*/}
                             </Col>
                         </Row>
                         <Row style={{ height: height*3,backgroundColor:"#fafafa" }}></Row>
@@ -477,8 +460,6 @@ const start = StyleSheet.create({
         height: height*182.5,
     },
     backgroundImage1: {
-        // marginTop:-10,
-        // marginLeft:-10,
         width: width*182.5,
         height: height*182.5,
     },

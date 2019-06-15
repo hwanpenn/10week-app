@@ -17,12 +17,12 @@ import {
 import { Constants, ImagePicker, Permissions } from 'expo';
 import {width, height} from "../constants/Layout";
 import {Toast} from "antd-mobile-rn/lib/index.native";
-
+import { Header, Left, Body, Right, Title ,Icon,Button as ButtonN} from 'native-base';
 
 export default class BaseDataVipScreen extends React.Component {
   static navigationOptions = {
-    // header: null,
-    headerTitle: '每日打卡'
+    header: null,
+    // headerTitle: '每日打卡'
     
   };
   constructor(props) {
@@ -73,12 +73,7 @@ export default class BaseDataVipScreen extends React.Component {
   getData = (id) => {
     axios.get(urlDev+'/api/user/'+id
     ).then( (response) => {
-    console.log('基础信息数据')
-    console.log(response.data.data)
-    // const dateTemp = new Date(response.data.data.birth);if(response.data.data.m)
     const today = this.getNowFormatDate()
-    console.log("today---------------")
-    console.log(today)
     let vipValue 
     if(response.data.data.markTime===today){
       vipValue = response.data.data.vipDay
@@ -91,11 +86,8 @@ export default class BaseDataVipScreen extends React.Component {
         editStatus:"create"
       })
     }
-    console.log("vipValue",vipValue)
     axios.get(urlDev+'/api/vipData?user='+id+'&vipDay='+(vipValue),
     ).then( (response) => {
-      console.log('个人打卡数据')
-    console.log(response.data.data)
     if(response.data.data.rows.length===0){
       
     }else{
@@ -124,12 +116,6 @@ export default class BaseDataVipScreen extends React.Component {
                   })
     }
       
-      // if(response.code===0){
-      //     // document.getElementById("layui-layer2").style.display='block'
-      // }else {
-      //     Toast.success(response.data.msg);
-      // }
-
     })
     .catch(function (error) {
         console.log(error);
@@ -144,9 +130,6 @@ export default class BaseDataVipScreen extends React.Component {
         console.log(error);
     });
   }
-  // onChangeTime = value => {
-  //   this.setState({ birth:value });
-  // };
   onChangeSubmit = value => {
     let values = {}
 
@@ -202,14 +185,10 @@ export default class BaseDataVipScreen extends React.Component {
 
 
   create = (values) => {
-    console.log(values)
     const thisTemp = this
     axios.post(urlDev+'/api/vipData',values
     ).then( (response) => {
-          // console.log('/api/vipData')
-          // console.log(response.data.data)
           if(response.data.code===0){
-            // Toast.success(response.data.msg);
             let params = {}
             params.vipDay = values.vipDay
             params.markTime = this.getNowFormatDate()
@@ -218,8 +197,6 @@ export default class BaseDataVipScreen extends React.Component {
             }
             axios.put(urlDev+'/api/user/'+this.state.id,params
             ).then( (response) => {
-                  // console.log('/api/user/')
-                  // console.log(response.data.data)
                   if(response.data.code===0){
                     Toast.success('操作成功 !',1);
                     this.setState({
@@ -244,15 +221,10 @@ export default class BaseDataVipScreen extends React.Component {
   }
   update = (values) => {
     const thisTemp = this
-    // values.vipDay='1'
     axios.put(urlDev+'/api/vipData/'+this.state.markId,values
     ).then( (response) => {
-          // console.log('/api/vipData')
-          // console.log(response.data.data)
           if(response.data.code===0){
-            // Toast.success(response.data.msg);
             let params = {}
-            // params.vipDay = '1'
             params.vipDay = values.vipDay
             params.markTime = this.getNowFormatDate()
             if(values.weight){
@@ -260,8 +232,6 @@ export default class BaseDataVipScreen extends React.Component {
             }
             axios.put(urlDev+'/api/user/'+this.state.id,params
             ).then( (response) => {
-                  // console.log('/api/user/')
-                  // console.log(response.data.data)
                   if(response.data.code===0){
                     Toast.success('打卡成功 !',1);
                     this.setState({
@@ -305,8 +275,6 @@ export default class BaseDataVipScreen extends React.Component {
   endVip = (params) => {
     axios.put(urlDev+'/api/user/'+this.state.id,params
             ).then( (response) => {
-                  // console.log('/api/user/')
-                  // console.log(response.data.data)
                   if(response.data.code===0){
                     // Toast.success(response.data.msg);
                 }else {
@@ -325,6 +293,20 @@ export default class BaseDataVipScreen extends React.Component {
     return (
       <View style={styles.container01}>
       {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*(-20) , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
+      <Header  transparent>
+          <Left>
+              <ButtonN onPress={() => this.props.navigation.navigate( 'Main')} transparent>
+                  <Icon style={{marginLeft:width*15 }} name="arrow-back" />
+              </ButtonN>
+          </Left>
+          <Body>
+          <Title style={{fontSize: 18}}>每日打卡</Title>
+          </Body>
+          <Right>
+              <ButtonN transparent>
+              </ButtonN>
+          </Right>
+      </Header>
       <ScrollView
         style={{ flex: 1 }}
         automaticallyAdjustContentInsets={false}
@@ -334,7 +316,6 @@ export default class BaseDataVipScreen extends React.Component {
         <List renderHeader={this.state.editStatus==='modify'?'更新第'+(this.state.data.vipDay)+'次打卡':'开始第'+(this.state.data.vipDay+1)+'次打卡'}>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.bust)}
             onChange={value => {
@@ -343,13 +324,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="厘米"
-            // placeholder="有标签"
           >
           胸围
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.waist)}
             onChange={value => {
@@ -358,13 +337,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="厘米"
-            // placeholder="有标签"
           >
           腰围
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.hip)}
             onChange={value => {
@@ -373,13 +350,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="厘米"
-            // placeholder="有标签"
           >
           臀围
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.thigh)}
             onChange={value => {
@@ -388,13 +363,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="厘米"
-            // placeholder="有标签"
           >
           大腿围
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.upperHip)}
             onChange={value => {
@@ -403,13 +376,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="厘米"
-            // placeholder="有标签"
           >
           上臀围
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.strength)}
             onChange={value => {
@@ -417,14 +388,11 @@ export default class BaseDataVipScreen extends React.Component {
                 strength:value,
               });
             }}
-            // extra="千克"
-            // placeholder="有标签"
           >
           力量测试
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.sitUp)}
             onChange={value => {
@@ -433,13 +401,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="个"
-            // placeholder="有标签"
           >
           仰卧起坐
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.flatSupport)}
             onChange={value => {
@@ -448,13 +414,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="个"
-            // placeholder="有标签"
           >
           平板支撑
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.pushUp)}
             onChange={value => {
@@ -463,13 +427,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="个"
-            // placeholder="有标签"
           >
           俯卧撑
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.bobbyJump)}
             onChange={value => {
@@ -478,13 +440,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="个"
-            // placeholder="有标签"
           >
           波比跳
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.weight.toString())}
             onChange={value => {
@@ -493,13 +453,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="千克"
-            // placeholder="有标签"
           >
           体重
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.bodyFatRate)}
             onChange={value => {
@@ -508,13 +466,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="%"
-            // placeholder="有标签"
           >
           体脂率
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.bodyMoistureRate)}
             onChange={value => {
@@ -523,13 +479,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="%"
-            // placeholder="有标签"
           >
           身体水分率
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.muscleMass)}
             onChange={value => {
@@ -538,13 +492,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="%"
-            // placeholder="有标签"
           >
           肌肉量
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.basalMetabolicRate)}
             onChange={value => {
@@ -553,13 +505,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="%"
-            // placeholder="有标签"
           >
           基础代谢率
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.boneWeight)}
             onChange={value => {
@@ -568,13 +518,11 @@ export default class BaseDataVipScreen extends React.Component {
               });
             }}
             extra="%"
-            // placeholder="有标签"
           >
           骨重量
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={(this.state.visceralFatGrade)}
             onChange={value => {
@@ -582,8 +530,6 @@ export default class BaseDataVipScreen extends React.Component {
                 visceralFatGrade:value,
               });
             }}
-            // extra="%"
-            // placeholder="有标签"
           >
           内脏脂肪等级
           </InputItem>

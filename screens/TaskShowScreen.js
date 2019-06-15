@@ -11,7 +11,6 @@ import { viewurl } from '../cfg/cfg.js';
 import {  Row } from 'react-native-easy-grid';
 import {width, height} from "../constants/Layout";
 import Loadinggif from '../components/Loadinggif';
-// import Webviewtemp from './component/Webviewtemp';
 import { WebView,StatusBar} from 'react-native';
 import axios from "axios/index";
 export default class TaskShowScreen extends React.Component {
@@ -41,7 +40,6 @@ export default class TaskShowScreen extends React.Component {
         .catch(function (error) {
             console.log(error);
         });
-            // alert(value)
         })
 }
   renderLoading = ()=>{

@@ -8,7 +8,6 @@ import {connect} from "react-redux";
 import axios from 'axios';
 import {  Toast } from 'antd-mobile-rn';
 import {AsyncStorage, Platform, StyleSheet} from "react-native";
-// import {   } from 'native-base';
 
 class RegistScreen extends Component {
     state={
@@ -22,12 +21,10 @@ class RegistScreen extends Component {
         header: null,
     };
     async componentDidMount(){
-        // console.log("开始访问")
         // this.props.getUser();
     }
 
     _handleIsOpenClick = () => {
-        // alert("123"+this.state.mobile)
         const params = {
             mobile:this.state.mobile
         }
@@ -37,10 +34,6 @@ class RegistScreen extends Component {
                 mobile: this.state.mobile,
             })
                 .then(function (response) {
-                    // console.log("短信请求111");
-                    // console.log(response);
-                    // console.log(response.data);
-                    // this.setState({mobile:''})
                     thisTemp.setState({
                         code:response.data.data.code
                     })
@@ -62,14 +55,12 @@ class RegistScreen extends Component {
                 }
             }, 1000);
         }else {
-            // alert("先输个手机号")
             Toast.info('先输个手机号 !');
         }
 
 
     };
     _handleIsOpenClick1 = () => {
-        // this.props.navigation.navigate( 'SetName');
         if(this.state.inputCode===''||this.state.code===''){
             Toast.fail('请先验证手机号 !',1);
         }else
@@ -79,41 +70,22 @@ class RegistScreen extends Component {
         }else {
             Toast.fail('验证码错误 !',1);
         }
-        // console.log(this.state.mobile)
         AsyncStorage.setItem('mobile', (this.state.mobile), (error, result) => {
             if (!error) {
                 // console.log("设置成功")
-                // this.setState({ firstOpen: false });
             }
         });
     };
     _handleIsOpenClick3 = () => {
         this.props.navigation.navigate( 'Login');
-        // AsyncStorage.setItem('firstOpen', JSON.stringify('false'), (error, result) => {
-        //     if (!error) {
-        //         console.log("设置成功")
-        //         this.setState({ firstOpen: false });
-        //     }
-        // });
     };
     _handleIsOpenClick4 = () => {
         this.props.navigation.navigate( 'Main');
     };
     render() {
-        // const
-        // const thisTemp = this;
         return (
             <Container>
-                {/* <Content >  */}
-                {/*<StatusBar*/}
-                    {/*// backgroundColor="blue"*/}
-                    {/*backgroundColor={'green'}*/}
-                    {/*barStyle="light-content"*/}
-                {/*/>*/}
-                {/*<Header />*/}
                 <Grid>
-                    {/*<Row style={{ backgroundColor: '#635DB7', height: height*88 }}></Row>*/}
-                    {/*<Col style={{ backgroundColor: '#635DB7', height: height*88 }}></Col>*/}
                     <Row style={{  height: height*88 }}></Row>
                     <Row style={{  height: height*114,
                         justifyContent: 'center' }}>
@@ -121,16 +93,12 @@ class RegistScreen extends Component {
                     </Row>
                     <Row style={{  height: height*67,
                         justifyContent: 'center' }}>
-                        {/* <Content  > */}
                             <Item style={{  width: width*315,marginBottom:30}} >
                                 <Input onChangeText={(text) => this.setState({mobile:text})} style={{fontSize: 15,marginLeft:30}} placeholderTextColor="#888888"  placeholder='手机号'/>
-                                {/*<Icon name='checkmark-circle' />*/}
                             </Item>
-                        {/* </Content> */}
                     </Row>
                     <Row style={{  height: height*55,
                         justifyContent: 'center' }}>
-                        {/* <Content  > */}
                             <Item style={{  width: width*315,marginBottom:15 }} >
                                 <Input onChangeText={(text) => this.setState({inputCode:text})} style={{fontSize: 15,marginLeft:30}} placeholderTextColor="#888888" placeholder='验证码'/>
                                 {this.state.gettingCode?
@@ -147,7 +115,6 @@ class RegistScreen extends Component {
                                             justifyContent: 'center',}}>{Platform.OS === 'ios' ?'获取验证码' : '验证码'}</Text>
                                     </Button>}
                             </Item>
-                        {/* </Content> */}
                     </Row>
                     <Row style={{  height: height*40 }}></Row>
                     <Row style={{  height: height*75,
@@ -195,7 +162,6 @@ class RegistScreen extends Component {
                         <Col style={{  height: height*89 }}></Col>
                     </Row>  */}
                 </Grid>
-                {/* </Content> */}
             </Container>
         );
     }

@@ -12,7 +12,6 @@ export default class AuthLoadingScreen extends React.Component {
     async componentDidMount(){
         AsyncStorage.getItem('username')
             .then((value) => {
-                    // 没有token，默认跳转登录注册页
                     this.props.navigation.navigate(value ? 'Main' : 'Main');
                     // this.props.navigation.navigate(value ? 'Main' : 'Regist');
                     // this.props.navigation.navigate(value ? 'Main' : 'Reset');

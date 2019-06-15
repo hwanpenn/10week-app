@@ -17,12 +17,13 @@ import {
 import { Constants, ImagePicker, Permissions } from 'expo';
 import {width, height} from "../constants/Layout";
 import {Toast} from "antd-mobile-rn/lib/index.native";
+import { Header, Left, Body, Right, Title ,Icon,Button as ButtonN} from 'native-base';
 
 
 export default class BaseDataScreen extends React.Component {
   static navigationOptions = {
-    // header: null,
-    headerTitle: '基础数据'
+    header: null,
+    // headerTitle: '基础数据'
     
   };
   constructor(props) {
@@ -53,7 +54,6 @@ export default class BaseDataScreen extends React.Component {
           thisTemp.setState({
               id:value?value:'5cae30c19a6c6264b51fc555'
             })
-            // alert(value)
             thisTemp.getData(value)
         })
   }
@@ -134,6 +134,20 @@ export default class BaseDataScreen extends React.Component {
     return (
       <View style={styles.container01}>
       {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*(-20) , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
+      <Header  transparent>
+          <Left>
+              <ButtonN onPress={() => this.props.navigation.navigate( 'Main')} transparent>
+                  <Icon style={{marginLeft:width*15 }} name="arrow-back" />
+              </ButtonN>
+          </Left>
+          <Body>
+          <Title style={{fontSize: 18}}>基础数据</Title>
+          </Body>
+          <Right>
+              <ButtonN transparent>
+              </ButtonN>
+          </Right>
+      </Header>
       <ScrollView
         style={{ flex: 1 }}
         automaticallyAdjustContentInsets={false}
@@ -143,49 +157,39 @@ export default class BaseDataScreen extends React.Component {
         <List renderHeader={'基础信息'}>
           <InputItem
             clear
-            // error
             value={this.state.realName}
             onChange={value => {
               this.setState({
                 realName:value,
               });
             }}
-            // extra="元"
-            // placeholder="有标签"
           >
           用户名
           </InputItem>
           <InputItem
             clear
-            // error
             value={this.state.city}
             onChange={value => {
               this.setState({
                 city:value,
               });
             }}
-            // extra="元"
-            // placeholder="有标签"
           >
           地址
           </InputItem>
           <InputItem
             clear
-            // error
             value={this.state.email}
             onChange={value => {
               this.setState({
                 email:value,
               });
             }}
-            // extra="元"
-            // placeholder="有标签"
           >
           邮件
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={this.state.age}
             onChange={value => {
@@ -194,7 +198,6 @@ export default class BaseDataScreen extends React.Component {
               });
             }}
             extra="岁"
-            // placeholder="有标签"
           >
           年龄
           </InputItem>
@@ -209,13 +212,11 @@ export default class BaseDataScreen extends React.Component {
               });
             }}
             extra="厘米"
-            // placeholder="有标签"
           >
           身高
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={this.state.weight}
             onChange={value => {
@@ -224,28 +225,22 @@ export default class BaseDataScreen extends React.Component {
               });
             }}
             extra="千克"
-            // placeholder="有标签"
           >
           体重
           </InputItem>
           <InputItem
             clear
-            // error
-            // type="number"
             value={this.state.sex}
             onChange={value => {
               this.setState({
                 sex:value,
               });
             }}
-            // extra="千克"
-            // placeholder="有标签"
           >
           性别
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={this.state.exerciseVolume}
             onChange={value => {
@@ -254,13 +249,11 @@ export default class BaseDataScreen extends React.Component {
               });
             }}
             extra="难度"
-            // placeholder="有标签"
           >
           运动强度
           </InputItem>
           <InputItem
             clear
-            // error
             type="number"
             value={this.state.income}
             onChange={value => {
@@ -269,27 +262,11 @@ export default class BaseDataScreen extends React.Component {
               });
             }}
             extra="澳元"
-            // placeholder="有标签"
           >
           收入
           </InputItem>
           
-          <Provider>
-            <View>
-              <List>
-                <DatePicker
-                  value={this.state.birth}
-                  mode="date"
-                  minDate={new Date(1926, 7, 6)}
-                  maxDate={new Date(2036, 11, 3)}
-                  onChange={this.onChangeTime}
-                  format="YYYY-MM-DD"
-                >
-                  <List.Item arrow="horizontal">出生日期</List.Item>
-                </DatePicker>
-              </List>
-            </View>
-          </Provider>
+          
 
           <View>
           
@@ -306,18 +283,35 @@ export default class BaseDataScreen extends React.Component {
             {this._maybeRenderUploadingOverlay()}
           </View>
 
-          <List.Item>
-            <ButtonAnt
-            style={{marginTop:30}}
-              onPress={() => {
-                this.onChangeSubmit()
-              }}
-              type="primary"
-            >
-              确定
-            </ButtonAnt>
-          </List.Item>
+         
         </List>
+        <Provider>
+            <View>
+              <List>
+                <DatePicker
+                  value={this.state.birth}
+                  mode="date"
+                  minDate={new Date(1926, 7, 6)}
+                  maxDate={new Date(2036, 11, 3)}
+                  onChange={this.onChangeTime}
+                  format="YYYY-MM-DD"
+                >
+                  <List.Item arrow="horizontal">出生日期</List.Item>
+                </DatePicker>
+              </List>
+            </View>
+          </Provider>
+          <List.Item>
+          <ButtonAnt
+          style={{marginTop:30}}
+            onPress={() => {
+              this.onChangeSubmit()
+            }}
+            type="primary"
+          >
+            确定
+          </ButtonAnt>
+        </List.Item>
       </ScrollView>
       </View>
     );
@@ -383,7 +377,6 @@ export default class BaseDataScreen extends React.Component {
       status: cameraRollPerm
     } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
-    // only if user allows permission to camera AND camera roll
     if (cameraPerm === 'granted' && cameraRollPerm === 'granted') {
       let pickerResult = await ImagePicker.launchCameraAsync({
         // allowsEditing: true,
@@ -399,7 +392,6 @@ export default class BaseDataScreen extends React.Component {
       status: cameraRollPerm
     } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
-    // only if user allows permission to camera roll
     if (cameraRollPerm === 'granted') {
       let pickerResult = await ImagePicker.launchImageLibraryAsync({
         // allowsEditing: true,
@@ -421,8 +413,6 @@ export default class BaseDataScreen extends React.Component {
       if (!pickerResult.cancelled) {
         uploadResponse = await uploadImageAsync(pickerResult.uri);
         uploadResult = await uploadResponse.json();
-// console.log("uploadResult")
-// console.log(uploadResult)
 const urlTemp = urlDev+uploadResult.data.url
         this.setState({
           image: urlTemp
@@ -443,15 +433,6 @@ const urlTemp = urlDev+uploadResult.data.url
 
 async function uploadImageAsync(uri) {
   let apiUrl = urlDev+'/api/upload';
-
-  // Note:
-  // Uncomment this if you want to experiment with local server
-  //
-  // if (Constants.isDevice) {
-  //   apiUrl = `https://your-ngrok-subdomain.ngrok.io/upload`;
-  // } else {
-  //   apiUrl = `http://localhost:3000/upload`
-  // }
 
   let uriParts = uri.split('.');
   let fileType = uriParts[uriParts.length - 1];
@@ -500,16 +481,7 @@ const styles = StyleSheet.create({
   maybeRenderContainer: {
     alignItems: 'center',
     borderRadius: 3,
-    // elevation: 2,
     marginTop: 30,
-    // shadowColor: 'rgba(0,0,0,1)',
-    // shadowOpacity: 0.2,
-    // shadowOffset: {
-    //   height: 4,
-    //   width: 4,
-    // },
-    // shadowRadius: 5,
-    // width: 250,
   },
   maybeRenderImageContainer: {
     borderTopLeftRadius: 3,

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
 import TabBarIcon from '../components/TabBarIcon';
 // import HomeScreen from '../screens/HomeScreen';
 import NewsScreen from '../screens/NewsScreen';
@@ -16,9 +15,11 @@ const HomeStack = createStackNavigator({
 });
 
 HomeStack.navigationOptions = {
-  activeBackgroundColor: '#ffffff',
-  activeTintColor: '#ffffff',
   tabBarLabel: '首页',
+  tabBarOptions: {
+    activeTintColor: 'tomato',
+    inactiveTintColor: 'gray',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -33,11 +34,14 @@ HomeStack.navigationOptions = {
 
 const NewsStack = createStackNavigator({
   News: NewsScreen,
-  // News: HomeScreen,
 });
 
 NewsStack.navigationOptions = {
   tabBarLabel: '新闻',
+  tabBarOptions: {
+    activeTintColor: 'tomato',
+    inactiveTintColor: 'gray',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -56,6 +60,10 @@ const VideoStack = createStackNavigator({
 
 VideoStack.navigationOptions = {
   tabBarLabel: '视频',
+  tabBarOptions: {
+    activeTintColor: 'tomato',
+    inactiveTintColor: 'gray',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -70,6 +78,10 @@ const RankStack = createStackNavigator({
 
 RankStack.navigationOptions = {
   tabBarLabel: '排行榜',
+  tabBarOptions: {
+    activeTintColor: 'tomato',
+    inactiveTintColor: 'gray',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

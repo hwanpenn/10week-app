@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Container, Header,Text,Item, Input, Icon,Content,Button } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import {appReduxChange} from "../actions/app";
 import {width, height} from "../constants/Layout";
@@ -8,17 +7,12 @@ import {AsyncStorage,  Platform, StyleSheet,Image,View,StatusBar} from "react-na
 import {
     ScrollView
 } from 'react-native';
-// import {   } from 'native-base';
 import { Text,Content } from 'native-base';
 import { Container, Header, Body, Right, Button, Icon, Title } from 'native-base';
 import { Carousel } from '@ant-design/react-native';
 import {Toast} from "antd-mobile-rn/lib/index.native";
-// import Orientation from 'react-native-orientation';
-// import { ScreenOrientation } from 'expo';
-// import { Grid } from '@ant-design/react-native';
-// import { Col, Row, Grid } from 'react-native-easy-grid';
-// import {width, height} from "./constants/Layout";
-// ScreenOrientation.allowAsync(ScreenOrientation.Orientation.PORTRAIT)
+import  {DeviceEventEmitter} from 'react-native';
+
 
 const cards = [
     {
@@ -48,21 +42,14 @@ class IndexScreen extends Component {
     static navigationOptions = {
         header: null,
     };
-//     async componentWillMount() {
-//         ScreenOrientation.allowAsync(ScreenOrientation.Orientation.PORTRAIT);
-//         Orientation.lockToPortrait();
-//  }
+
     async componentDidMount(){
-        // Orientation.unlockAllOrientations();
         const thisTemp = this;
         AsyncStorage.getItem('firstOpen')
             .then((value) => {
-                console.log("firstOpen02---------")
-                console.log(value)
             })
         AsyncStorage.getItem('username')
             .then((value) => {
-                console.log("value---------")
                 console.log(value)
                 thisTemp.setState({
                     username:value?value:''
@@ -70,100 +57,85 @@ class IndexScreen extends Component {
             })
         AsyncStorage.getItem('vip')
             .then((value) => {
-                console.log("vip---------")
-                console.log(value)
                 thisTemp.setState({
                     vip:value?value:'false'
                 })
             })
-        // console.log(width)
     }
-    // async componentDidMount(){
-    // //    this.props.appReduxChange({"usename":'123'})
-    // }
-    handleMenuClick00 = () => {
+    handleMenuClickNews = () => {
+        // DeviceEventEmitter.emit('targetUrl','/mobile/newspagelist');
         this.props.navigation.navigate( 'News');
     };
-    handleMenuClick01 = () => {
-        // this.props.navigation.navigate( 'News'  ,{url:'/mobile/videopagelist'});
+    handleMenuClickVideo = () => {
+        // DeviceEventEmitter.emit('targetUrl','/mobile/videopagelist');
         this.props.navigation.navigate( 'Video');
     };
-    handleMenuClick02 = () => {
+    handleMenuClickRank = () => {
         this.props.navigation.navigate( 'Rank');
     };
-    handleMenuClick03 = () => {
+    handleMenuClickBaseData = () => {
         if(this.state.username===''){
             Toast.fail('请先登录',1);
         }else{
             this.props.navigation.navigate( 'BaseData');
         }
     };
-    handleMenuClick04 = () => {
+    handleMenuClickRecipe = () => {
         this.props.navigation.navigate( 'Recipe');
     };
-    handleMenuClick05 = () => {
+    handleMenuClickBaseDataVip = () => {
             this.props.navigation.navigate( 'BaseDataVip');
     };
-    handleMenuClick06 = () => {
+    handleMenuClickVipDataList = () => {
         this.props.navigation.navigate( 'VipDataList');
     };
-    handleMenuClick07 = () => {
+    handleMenuClickChart = () => {
         this.props.navigation.navigate( 'Chart');
     };
-    handleMenuClick08 = () => {
+    handleMenuClickTaskShow = () => {
         this.props.navigation.navigate( 'TaskShow');
     };
-    handleMenuClick09 = () => {
+    handleMenuClickTask = () => {
         this.props.navigation.navigate( 'Task');
     };
-    handleMenuClick10 = () => {
+    handleMenuClickPicture = () => {
         this.props.navigation.navigate( 'Picture');
     };
-    handleMenuClick11 = () => {
-        console.log(this.state.username)
+    handleMenuClickJoin = () => {
         if(this.state.username===''){
             Toast.fail('请先登录',1);
         }else{
-            // alert('等待付款')
             this.props.navigation.navigate( 'Rank');
         }
-        // this.props.navigation.navigate( 'Picture');
     };
     _handleIsOpenClickLogin = () => {
         AsyncStorage.setItem('username', (''), (error, result) => {
             if (!error) {
-                // console.log("设置成功")
                 this.setState({ username: '' });
             }
             AsyncStorage.setItem('vip', ('false'), (error, result) => {
                 if (!error) {
-                    // console.log("设置成功")
                     this.setState({ username: '' });
                 }
                 this.props.navigation.navigate( 'Login');
             });
         });
-        // this.props.navigation.navigate( 'Reset');
     };
     _handleIsOpenClickLogout = () => {
         AsyncStorage.setItem('username', (''), (error, result) => {
             if (!error) {
-                // console.log("设置成功")
                 this.setState({ username: '' });
             }
             AsyncStorage.setItem('vip', ('false'), (error, result) => {
                 if (!error) {
-                    // console.log("设置成功")
                     this.setState({ username: '' });
                 }
                 this.props.navigation.navigate( 'Login');
             });
         });
-        // this.props.navigation.navigate( 'Reset');
     };
    
     render() {
-        // const
         return (
             <Container style={styles.container}>
             {Platform.OS === 'ios' ? 
@@ -175,9 +147,14 @@ class IndexScreen extends Component {
                 
                 <Row style={{  height: height*10 }}></Row>
                 <Header style={{  marginTop: -height*22 }} transparent>
-                    <Body >
-                    <Title style={{marginLeft:Platform.OS === 'ios' ?width*35 : -width*35 ,fontSize: 25,width:width*300,color:Platform.OS === 'ios' ?'black' : 'black'}}>欢迎加入十周挑战</Title>
-                    </Body>
+                {Platform.OS === 'ios' ?<Body style={{alignItems: 'left',}} >
+                <Title style={{textAlign:'left',marginLeft:Platform.OS === 'ios' ?width*5 : width*5 ,fontSize: 25,width:width*300,color:Platform.OS === 'ios' ?'black' : 'black'}}>{'欢迎加入十周挑战'}</Title>
+                </Body>:
+                <Body style={{}} >
+                <Title style={{textAlign:'left',marginLeft:Platform.OS === 'ios' ?width*5 : width*5 ,fontSize: 25,width:width*300,color:Platform.OS === 'ios' ?'black' : 'black'}}>{'欢迎加入十周挑战'}</Title>
+                </Body>
+            }
+                    
                     <Right>
                     {this.state.username===''?<Button  onPress={() => {
                         this._handleIsOpenClickLogin()
@@ -238,7 +215,7 @@ class IndexScreen extends Component {
                            <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                            <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                <Button onPress={() => {
-                                   this.handleMenuClick00()
+                                   this.handleMenuClickNews()
                                }} style={styles.menubutton} rounded>
                                    <Text style={{fontSize: 19}}>查看动态</Text>
                                </Button>
@@ -264,7 +241,7 @@ class IndexScreen extends Component {
                        <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                        <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                            <Button onPress={() => {
-                               this.handleMenuClick01()
+                               this.handleMenuClickVideo()
                            }} style={styles.menubutton} rounded>
                                <Text style={{fontSize: 19}}>开始学习</Text>
                            </Button>
@@ -294,7 +271,7 @@ class IndexScreen extends Component {
                       <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                       <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                           <Button onPress={() => {
-                              this.handleMenuClick02()
+                              this.handleMenuClickRank()
                           }} style={styles.menubutton} rounded>
                               <Text style={{fontSize: 19}}>查看榜单</Text>
                           </Button>
@@ -320,7 +297,7 @@ class IndexScreen extends Component {
                   <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                   <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                       <Button onPress={() => {
-                          this.handleMenuClick03()
+                          this.handleMenuClickBaseData()
                       }} style={styles.menubutton} rounded>
                           <Text style={{fontSize: 19}}>编辑数据</Text>
                       </Button>
@@ -350,7 +327,7 @@ class IndexScreen extends Component {
                            <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                            <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                <Button onPress={() => {
-                                   this.handleMenuClick11()
+                                   this.handleMenuClickJoin()
                                }} style={styles.menubutton} rounded>
                                    <Text style={{fontSize: 19}}>加入会员</Text>
                                </Button>
@@ -391,7 +368,7 @@ class IndexScreen extends Component {
                                     <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                                     <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                         <Button onPress={() => {
-                                            this.handleMenuClick04()
+                                            this.handleMenuClickRecipe()
                                         }} style={styles.menubutton} rounded>
                                             <Text style={{fontSize: 19}}>查看食谱</Text>
                                         </Button>
@@ -417,7 +394,7 @@ class IndexScreen extends Component {
                                 <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                                 <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                     <Button onPress={() => {
-                                        this.handleMenuClick05()
+                                        this.handleMenuClickBaseDataVip()
                                     }} style={styles.menubutton} rounded>
                                         <Text style={{fontSize: 19}}>开始打卡</Text>
                                     </Button>
@@ -449,7 +426,7 @@ class IndexScreen extends Component {
                                     <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                                     <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                         <Button onPress={() => {
-                                            this.handleMenuClick06()
+                                            this.handleMenuClickVipDataList()
                                         }} style={styles.menubutton} rounded>
                                             <Text style={{fontSize: 19}}>查看数据</Text>
                                         </Button>
@@ -475,7 +452,7 @@ class IndexScreen extends Component {
                                 <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                                 <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                     <Button onPress={() => {
-                                        this.handleMenuClick07()
+                                        this.handleMenuClickChart()
                                     }} style={styles.menubutton} rounded>
                                         <Text style={{fontSize: 19}}>回顾统计</Text>
                                     </Button>
@@ -506,7 +483,7 @@ class IndexScreen extends Component {
                                     <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                                     <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                         <Button onPress={() => {
-                                            this.handleMenuClick08()
+                                            this.handleMenuClickTaskShow()
                                         }} style={styles.menubutton} rounded>
                                             <Text style={{fontSize: 19}}>查看任务</Text>
                                         </Button>
@@ -532,7 +509,7 @@ class IndexScreen extends Component {
                                 <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                                 <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                     <Button onPress={() => {
-                                        this.handleMenuClick09()
+                                        this.handleMenuClickTask()
                                     }} style={styles.menubutton} rounded>
                                         <Text style={{fontSize: 19}}>查看</Text>
                                     </Button>
@@ -563,7 +540,7 @@ class IndexScreen extends Component {
                                <Row style={{ height: height*78 ,alignItems: 'center',justifyContent : "center",}}>
                                <View style={{ alignItems: 'center',justifyContent : "center",height : Platform.OS === "ios" ? 105.5 : 105.5}}>
                                    <Button onPress={() => {
-                                       this.handleMenuClick10()
+                                       this.handleMenuClickPicture()
                                    }} style={styles.menubutton} rounded>
                                        <Text style={{fontSize: 19}}>照片比对</Text>
                                    </Button>

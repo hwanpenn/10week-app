@@ -32,9 +32,7 @@ export default class BaseDataVipScreen extends React.Component {
           thisTemp.setState({
               id:value?value:'5cae30c19a6c6264b51fc555'
             })
-            // alert(value)
         })
-    // alert(width)
 }
 
 handleMessage = (e)=> {

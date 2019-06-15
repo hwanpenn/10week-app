@@ -27,6 +27,9 @@ export default class RankScreen extends React.Component {
     if(e.nativeEvent.data==="Index"){
       this.props.navigation.navigate('Home');
     }
+    if(e.nativeEvent.data==="/mobile/newspagelist"){
+      this.props.navigation.navigate('News');
+    }
 }
 
 
@@ -52,7 +55,7 @@ export default class RankScreen extends React.Component {
        {Platform.OS === 'ios' ?<StatusBar barStyle='dark-content' />:<Row style={{ height: height*20 , backgroundColor: 'black'}}><StatusBar barStyle='dark-content' /></Row>}
      <WebView scrollEnabled={false}
         source={{uri: viewurl+'/mobile/ranklistpage'}}
-        style={{marginTop: Platform.OS === 'ios' ?0:5}}
+        style={{marginTop: Platform.OS === 'ios' ?0:20}}
         useWebKit={true}
         mixedContentMode='always'
         renderLoading={this.renderLoading}

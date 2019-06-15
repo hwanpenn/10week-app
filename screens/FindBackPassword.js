@@ -9,7 +9,6 @@ import {AsyncStorage, Platform, StyleSheet} from "react-native";
 import {urlDev} from "../constants/Url";
 import axios from "axios/index";
 import {Toast} from "antd-mobile-rn/lib/index.native";
-// import {   } from 'native-base';
 
 class FindBackPassword extends Component {
     state={
@@ -26,7 +25,6 @@ class FindBackPassword extends Component {
         // console.log(width)
     }
     _handleIsOpenClick = () => {
-        // alert("123"+this.state.mobile)
         const params = {
             mobile:this.state.mobile
         }
@@ -36,10 +34,6 @@ class FindBackPassword extends Component {
                 mobile: this.state.mobile,
             })
                 .then(function (response) {
-                    // console.log("短信请求111");
-                    // console.log(response);
-                    // console.log(response.data);
-                    // this.setState({mobile:''})
                     thisTemp.setState({
                         code:response.data.data.code
                     })
@@ -61,7 +55,6 @@ class FindBackPassword extends Component {
                 }
             }, 1000);
         }else {
-            // alert("先输个手机号")
             Toast.info('先输个手机号 !');
         }
 
@@ -78,7 +71,6 @@ class FindBackPassword extends Component {
         }else {
             Toast.fail('验证码错误 !',1);
         }
-        // console.log(this.state.mobile)
         AsyncStorage.setItem('mobile', (this.state.mobile), (error, result) => {
             if (!error) {
                 // console.log("设置成功")
@@ -111,26 +103,20 @@ class FindBackPassword extends Component {
                     </Body>
                     <Right>
                         <Button transparent>
-                            {/*<Text>Cancel</Text>*/}
                         </Button>
                     </Right>
                 </Header>
                 <Grid>
                   
-                    {/*</Row>*/}
                     <Row style={{  height: height*41 }}></Row>
                     <Row style={{  height: height*67,
                         justifyContent: 'center' }}>
-                        {/* <Content  > */}
                             <Item style={{  width: width*315,marginBottom:30 }} >
                                 <Input onChangeText={(text) => this.setState({mobile:text})} style={{fontSize: 15,marginLeft: width*30}} placeholderTextColor="#888888"  placeholder='手机号'/>
-                                {/*<Icon name='checkmark-circle' />*/}
                             </Item>
-                        {/* </Content> */}
                     </Row>
                     <Row style={{  height: height*55,
                         justifyContent: 'center' }}>
-                        {/* <Content  > */}
                             <Item style={{  width: width*315,marginBottom:15 }} >
                                 <Input onChangeText={(text) => this.setState({inputCode:text})} style={{fontSize: 15,marginLeft: width*30}} placeholderTextColor="#888888" placeholder='验证码'/>
                                 {this.state.gettingCode?
@@ -147,7 +133,6 @@ class FindBackPassword extends Component {
                                 justifyContent: 'center',}}>{Platform.OS === 'ios' ?'获取验证码' : '验证码'}</Text>
                                 </Button>}
                             </Item>
-                        {/* </Content> */}
                     </Row>
                     <Row style={{  height: height*40 }}></Row>
                     <Row style={{  height: height*75,

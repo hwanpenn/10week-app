@@ -10,7 +10,6 @@ import { viewurl } from '../cfg/cfg.js';
 import {  Row } from 'react-native-easy-grid';
 import {width, height} from "../constants/Layout";
 import Loadinggif from '../components/Loadinggif';
-// import Webviewtemp from './component/Webviewtemp';
 import { WebView,StatusBar} from 'react-native';
 
 export default class NewsScreen extends React.Component {
@@ -19,6 +18,9 @@ export default class NewsScreen extends React.Component {
   //   headerTitle: '十周新闻'
     
   };
+  state={
+    targetUrl:'/mobile/newspagelist'
+  };
   renderLoading = ()=>{
     return(<Loadinggif />)
   }
@@ -26,6 +28,9 @@ export default class NewsScreen extends React.Component {
 
     if(e.nativeEvent.data==="Index"){
       this.props.navigation.navigate('Home');
+    }
+    if(e.nativeEvent.data==="/mobile/videopagelist"){
+      this.props.navigation.navigate('Video');
     }
 }
 
