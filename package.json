@@ -18,7 +18,7 @@
     "@expo/samples": "2.1.1",
     "@expo/vector-icons": "^9.0.0",
     "antd-mobile-rn": "^2.2.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "expo": "^32.0.0",
     "native-base": "^2.7.2",
